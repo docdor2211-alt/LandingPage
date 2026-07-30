@@ -3,12 +3,12 @@ import Home from './pages/Home'
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
-    if (typeof window === 'undefined') return true
+    if (typeof window === 'undefined') return false
 
     const savedTheme = window.localStorage.getItem('docdor-theme')
     if (savedTheme) return savedTheme === 'dark'
 
-    return true
+    return false
   })
 
   useEffect(() => {
