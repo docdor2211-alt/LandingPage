@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@keyframes borderFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 300% 50%;
+  }
+}
+
+@layer base {
+  html {
+    @apply bg-slate-950 text-slate-100 transition-colors duration-300;
+  }
+
+  body {
+    @apply min-h-screen bg-transparent text-inherit;
+  }
+}
+
+@layer utilities {
+  .animate-border-flow {
+    animation: borderFlow 3s linear infinite;
+  }
+}
