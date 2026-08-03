@@ -12,17 +12,15 @@ const OfferCard = ({
     <motion.div
       whileHover={{ y: -10, scale: 1.01 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
-      className={`relative overflow-hidden rounded-3xl bg-linear-to-r ${color} h-75 shadow-xl`}
+      className="relative overflow-hidden rounded-3xl bg-white h-75 shadow-xl"
     >
       <img
         src={image}
         alt={title}
-        className="absolute inset-0 h-full w-full object-cover opacity-25"
+        className="absolute inset-0 h-full w-full object-cover opacity-10"
       />
 
-      <div className="absolute inset-0 bg-black/20"></div>
-
-      <div className="relative flex h-full flex-col justify-center p-8 text-white">
+      <div className="relative flex h-full flex-col justify-center p-8 text-black">
         <span className="rounded-full bg-white/20 px-4 py-1 text-sm font-semibold w-fit backdrop-blur">
           LIMITED OFFER
         </span>

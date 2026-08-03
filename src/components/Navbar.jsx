@@ -8,7 +8,9 @@ import {
   FiMoon,
   FiSun,
   FiX,
+  FiHeart,
 } from "react-icons/fi";
+import Logo from "../assets/images/doc_1.png";
 
 
 const Navbar = ({ isDarkMode, toggleTheme }) => {
@@ -16,46 +18,38 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
 
   const shellClasses = isDarkMode
     ? "bg-slate-950/70 text-slate-100"
-    : "bg-white/70 text-slate-900";
+    : "bg-sky-100/90 text-slate-900";
 
   const panelClasses = isDarkMode
-    ? "bg-slate-900/95 text-slate-100 shadow-[0_0_30px_rgba(0,0,0,0.4)]"
-    : "bg-white/95 text-gray-900 shadow-[0_0_30px_rgba(15,23,42,0.12)]";
+    ? "bg-slate-900/95 text-slate-100 shadow-[0_0_30px_rgba(59,130,246,0.35)]"
+    : "bg-sky-50/90 text-gray-900 shadow-[0_24px_70px_rgba(56,189,248,0.18)]";
 
   const chipClasses = isDarkMode
     ? "border-slate-700 bg-slate-800/70 text-slate-100 hover:border-slate-500"
-    : "border-slate-200 bg-white/90 text-slate-900 hover:border-slate-300";
+    : "border-slate-200 bg-sky-50/80 text-slate-900 hover:border-slate-300";
 
   const iconButtonClasses = isDarkMode
     ? "border-slate-700 bg-slate-800/80 hover:bg-slate-700 text-slate-100"
-    : "border-slate-200 bg-white hover:bg-slate-100 text-slate-900";
+    : "border-slate-200 bg-sky-50/80 hover:bg-slate-100 text-slate-900";
 
   const inputClasses = isDarkMode
     ? "border-slate-700 bg-slate-800/80 text-slate-100 placeholder:text-slate-400 focus:ring-slate-500"
-    : "border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 focus:ring-slate-400";
+    : "border-slate-200 bg-sky-50/80 text-slate-900 placeholder:text-slate-400 focus:ring-sky-400";
 
   const mobileMenuClasses = isDarkMode
     ? "border-slate-700 bg-slate-900/95 text-slate-100"
-    : "border-slate-200/70 bg-white/90 text-slate-900";
+    : "border-slate-200/70 bg-sky-50/90 text-slate-900";
 
   return (
     <header className={`sticky top-0 z-50 ${shellClasses} backdrop-blur-md shadow-sm`}>
       <div className="max-w-7xl mx-auto px-5 py-3">
-        <div className="relative">
-          <div className={`absolute inset-1 rounded-4xl ${isDarkMode ? "bg-slate-800/60" : "bg-slate-200/40"} blur-2xl opacity-70`}></div>
+        <div className="relative ">
+          <div className={`absolute inset-1 rounded-4xl ${isDarkMode ? "bg-slate-800/60" : "bg-sky-200/50"} blur-3xl opacity-90`}></div>
           <div className={`relative overflow-hidden rounded-4xl ${panelClasses} transition-all duration-300`}>
             <div className="relative h-20 flex items-center justify-between px-5">
               {/* Logo */}
               <div className="flex items-center gap-3 cursor-pointer">
-                <div className={`flex h-11 w-11 items-center justify-center rounded-2xl text-lg font-bold shadow-sm ${isDarkMode ? "bg-gradient-to-br from-cyan-500 to-blue-600 text-white" : "bg-slate-900 text-white"}`}>
-                  D
-                </div>
-                <div>
-                  <h1 className={`text-xl font-bold ${isDarkMode ? "text-slate-100" : "text-gray-800"}`}>
-                    Docdor
-                  </h1>
-                  <p className={`text-xs ${isDarkMode ? "text-slate-400" : "text-slate-500"}`}>Healthcare Platform</p>
-                </div>
+                <img src={Logo} alt="Docdor logo" className="h-35 w-35 rounded-2xl object-contain" />
               </div>
 
               {/* Desktop */}
@@ -67,8 +61,11 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
                   </span>
                 </button>
 
-                <button className="rounded-2xl bg-gradient-to-r from-amber-400 to-orange-500 px-4 py-2 font-semibold text-slate-950 shadow-lg shadow-amber-200/50 transition hover:scale-105">
-                  ⭐ Care Plan
+                <button className="flex items-center gap-2 rounded-full border-2 border-amber-300 bg-blue-900 px-3 py-1 font-semibold text-white shadow-[0_10px_30px_rgba(15,23,42,0.18)] transition hover:scale-[1.02]">
+                  <span className="rounded-full bg-amber-300/90 p-2 text-slate-950">
+                    <FiHeart size={14} />
+                  </span>
+                  <span>Care Plan</span>
                 </button>
 
                 <div className="relative w-90">
@@ -127,8 +124,11 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
                     Indore, India
                   </button>
 
-                  <button className="bg-yellow-400 rounded-xl w-full py-3 font-semibold text-slate-950">
-                    ⭐ Care Plan
+                  <button className="flex items-center justify-center gap-2 rounded-xl border-2 border-amber-300 bg-slate-950/95 py-3 font-semibold text-white shadow-sm">
+                    <span className="rounded-full bg-amber-300/90 p-2 text-slate-950">
+                      <FiHeart size={16} />
+                    </span>
+                    Care Plan
                   </button>
 
                   <div className="relative">

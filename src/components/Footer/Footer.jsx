@@ -4,6 +4,7 @@ import {
   FaLinkedin,
   FaTwitter,
 } from "react-icons/fa";
+import Logo from "../../assets/images/doc_1.png";
 
 const Footer = ({ isDarkMode }) => {
   return (
@@ -16,31 +17,17 @@ const Footer = ({ isDarkMode }) => {
           {/* Logo */}
 
           <div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4">
 
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-900 text-xl font-bold text-white">
-                D
-              </div>
-
-              <div>
-                <h2 className={`text-2xl font-bold ${isDarkMode ? "text-slate-100" : "text-slate-950"}`}>
-                  Docdor
-                </h2>
-
-                <p className={isDarkMode ? "text-slate-400" : "text-slate-500"}>
-                  Healthcare Platform
-                </p>
-              </div>
-
+              <img src={Logo} alt="Docdor logo" className="h-28 w-32 rounded-xl object-contain" />
             </div>
 
-            <p className={`mt-6 leading-7 ${isDarkMode ? "text-slate-400" : "text-slate-600"}`}>
+            <p className={`leading-7 ${isDarkMode ? "text-slate-400" : "text-slate-600"}`}>
               Your trusted healthcare companion for consultations,
               medicines, diagnostics, AI assistance, and wellness.
             </p>
 
             <div className="mt-6 flex gap-4">
-
               <a
                 href="#"
                 className="rounded-full bg-slate-200 p-3 text-slate-700 hover:bg-slate-300"

@@ -1,8 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 
 import "swiper/css";
-import "swiper/css/pagination";
 
 import { offers } from "./offersData";
 import OfferCard from "./OfferCard";
@@ -14,12 +13,13 @@ const OfferCarousel = ({ isDarkMode }) => {
 
         <div className="mb-12 text-center">
 
-          <span className={`rounded-full px-5 py-2 text-sm font-semibold ${isDarkMode ? "bg-slate-800 text-slate-200" : "bg-slate-100 text-slate-700"}`}>
+          <span className={`rounded-full px-5 py-2 text-sm font-semibold ${isDarkMode ? "bg-blue-900 text-blue-100" : "bg-blue-100 text-blue-900"}`}>
             % BEST OFFERS
           </span>
 
           <h2 className={`mt-5 text-4xl font-bold ${isDarkMode ? "text-slate-100" : "text-gray-900"}`}>
-            Explore deals, offers,
+            Explore deals, off
+            ers,
             <br />
             health updates & more
           </h2>
@@ -32,14 +32,11 @@ const OfferCarousel = ({ isDarkMode }) => {
         </div>
 
         <Swiper
-          modules={[Autoplay, Pagination]}
+          modules={[Autoplay]}
           spaceBetween={30}
           autoplay={{
             delay: 3500,
             disableOnInteraction: false,
-          }}
-          pagination={{
-            clickable: true,
           }}
           loop={true}
           breakpoints={{

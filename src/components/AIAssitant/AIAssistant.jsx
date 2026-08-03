@@ -9,7 +9,7 @@ const AIAssistant = ({ isDarkMode }) => {
 
         <div className="text-center mb-16">
 
-          <span className={`rounded-full px-5 py-2 text-sm font-semibold ${isDarkMode ? "bg-slate-800 text-slate-200" : "bg-slate-100 text-slate-700"}`}>
+          <span className={`rounded-full px-5 py-2 text-sm font-semibold ${isDarkMode ? "bg-blue-900 text-blue-100" : "bg-blue-100 text-blue-900"}`}>
             AI HEALTH ASSISTANT
           </span>
 
@@ -25,17 +25,17 @@ const AIAssistant = ({ isDarkMode }) => {
 
         </div>
 
-        <div className="grid items-center gap-16 lg:grid-cols-2">
+        <div className="grid items-center gap-5 lg:grid-cols-2">
 
           {/* Robot */}
           <div className="relative flex justify-center">
 
-            <div className={`absolute h-80 w-80 rounded-full blur-3xl ${isDarkMode ? "bg-slate-700/40" : "bg-slate-200/40"}`}></div>
+            <div className={`absolute h-64 w-64 rounded-full blur-3xl ${isDarkMode ? "bg-slate-700/40" : "bg-slate-200/40"}`}></div>
 
             <img
               src={robot}
               alt="AI Robot"
-              className="relative w-72 animate-bounce md:w-96"
+              className="relative w-56 animate-bounce md:w-72"
             />
 
             <div className={`absolute top-12 left-0 rounded-2xl p-4 shadow-xl ${isDarkMode ? "bg-slate-800 text-slate-100" : "bg-white text-slate-900"}`}>
@@ -49,7 +49,7 @@ const AIAssistant = ({ isDarkMode }) => {
           </div>
 
           {/* Cards */}
-          <div className="grid gap-6 sm:grid-cols-2">
+          <div className="grid gap-14 sm:grid-cols-2">
 
             {aiFeatures.map((feature) => (
               <FeatureCard

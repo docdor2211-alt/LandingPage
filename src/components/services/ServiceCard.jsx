@@ -5,43 +5,61 @@ const ServiceCard = ({
   isDarkMode,
   title,
   description,
-  icon: Icon,
+  image,
   color,
-  iconColor,
   free,
+  fullBackground,
 }) => {
+  const bgStyle = fullBackground && image ? { backgroundImage: `url(${image})`, backgroundSize: "cover", backgroundPosition: "center" } : {};
+
   return (
     <motion.div
-      whileHover={{ y: -8, scale: 1.01 }}
-      transition={{ duration: 0.3, ease: "easeOut" }}
-      className={`group relative overflow-hidden rounded-3xl border p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl ${isDarkMode ? "border-slate-700 bg-slate-900/90 hover:border-slate-600" : "border-gray-200 bg-white hover:border-slate-300"}`}
+      whileHover={{ y: -6 }}
+      transition={{ duration: 0.28, ease: "easeOut" }}
+      style={bgStyle}
+      className={`group relative overflow-hidden rounded-2xl border transition-all duration-300 ${isDarkMode ? "border-slate-700 bg-slate-900/95 hover:border-slate-600" : "border-slate-200 bg-white/95 hover:border-slate-300"} ${fullBackground ? "p-0 shadow-lg bg-cover bg-center" : "p-4 shadow-lg"}`}
     >
       {free && (
-        <span className="absolute right-4 top-4 rounded-full bg-green-500 px-3 py-1 text-xs font-semibold text-white">
+        <span className={fullBackground ? "absolute left-1/2 -translate-x-1/2 bottom-2 rounded-full bg-pink-500 px-4 py-1.5 text-sm font-semibold text-white shadow-md z-20" : "absolute right-4 top-4 rounded-full bg-pink-500 px-3 py-1 text-xs font-semibold text-white shadow-sm z-20"}>
           FREE
         </span>
       )}
 
-      <div
-        className={`flex h-16 w-16 items-center justify-center rounded-2xl ${color}`}
-      >
-        <Icon className={`text-3xl ${iconColor}`} />
-      </div>
+      {fullBackground && image ? (
+        <>
+          <div className="absolute left-0 right-0 top-4 z-30 flex justify-center">
+            <div className={`rounded-full px-4 py-1 ${isDarkMode ? 'bg-black/55 text-slate-100' : 'bg-white/90 text-slate-900'} shadow-sm`}>{title}</div>
+          </div>
+          <div className="relative z-10 flex h-78 w-full items-end justify-center">
+            {/* <div className={`w-full rounded-b-2xl p-4 ${isDarkMode ? "bg-black/28" : "bg-white/65"}`}>
+              <p className={`mt-2 text-xs text-center ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>{description}</p>
+            </div> */}
+          </div>
+        </>
+      ) : (
+        <>
+          {image && (
+            <div className={`mx-auto mb-4 flex h-40 w-40 items-center justify-center rounded-[1rem] bg-gradient-to-br ${color} p-4 shadow-inner`}>
+              <img src={image} alt={title} className="h-full w-full object-contain" />
+            </div>
+          )}
 
-      <h3 className={`mt-6 text-xl font-bold ${isDarkMode ? "text-slate-100" : "text-gray-800"}`}>
-        {title}
-      </h3>
+          <h3 className={`text-xl font-bold ${isDarkMode ? "text-slate-100" : "text-slate-900"}`}>
+            {title}
+          </h3>
 
-      <p className={`mt-3 leading-7 ${isDarkMode ? "text-slate-400" : "text-gray-500"}`}>
-        {description}
-      </p>
-
-      <button className={`mt-6 flex items-center gap-2 font-semibold ${isDarkMode ? "text-slate-200" : "text-slate-900"}`}>
-        Learn More
-        <FiArrowUpRight className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-      </button>
-
-      <div className={`absolute inset-x-0 bottom-0 h-1 scale-x-0 transition-transform duration-300 group-hover:scale-x-100 ${isDarkMode ? "bg-slate-100" : "bg-slate-900"}`}></div>
+          {/* <p className={`mt-3 text-sm leading-7 ${isDarkMode ? "text-slate-400" : "text-slate-600"}`}>
+            {description}
+          </p> */}
+{/* 
+          <div className="mt-6 flex justify-center">
+            <button className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition ${isDarkMode ? "border-slate-700 text-slate-100 hover:border-slate-500" : "border-slate-200 text-slate-900 hover:border-slate-300"}`}>
+              Learn More
+              <FiArrowUpRight className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+            </button>
+          </div> */}
+        </>
+      )}
     </motion.div>
   );
 };
