@@ -4,7 +4,7 @@ import robot from "../../assets/images/robot.png";
 
 const AIAssistant = ({ isDarkMode }) => {
   return (
-    <section className={`py-12 sm:py-24 overflow-hidden transition-colors duration-300 ${isDarkMode ? "bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900" : "bg-gradient-to-br from-slate-100 via-white to-slate-50"}`}>
+    <section id="ai-assistant" className={`scroll-mt-24 py-12 sm:py-24 overflow-hidden transition-colors duration-300 ${isDarkMode ? "bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900" : "bg-gradient-to-br from-slate-100 via-white to-slate-50"}`}>
       <div className="mx-auto max-w-7xl px-6">
 
         <div className="text-center mb-16">

@@ -1,25 +1,21 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import Services from "../components/services/Services";
 import AIAssistant from "../components/AIAssitant/AIAssistant";
-import OfferCarousel from "../components/offers/OfferCarousel";
-import FloatingCTA from "../components/FloatingCTA/FloatingCTA";
-import BottomNavigation from "../components/BottomNavigation/BottomNavigation";
-import Footer from "../components/Footer/Footer";
+import HealthHighlights from "../components/highlights/HealthHighlights";
 
-export default function Home({ isDarkMode, toggleTheme }) {
+export default function Home({ isDarkMode, onOpenDownload }) {
   const containerRef = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from(".section-reveal", {
         opacity: 0,
-        y: 40,
-        duration: 0.9,
+        y: 32,
+        duration: 0.75,
         ease: "power3.out",
-        stagger: 0.15,
+        stagger: 0.12,
       });
     }, containerRef);
 
@@ -27,17 +23,9 @@ export default function Home({ isDarkMode, toggleTheme }) {
   }, []);
 
   return (
-    <div
-      ref={containerRef}
-      className={`min-h-screen transition-colors duration-300 ${
-        isDarkMode ? "bg-slate-950 text-slate-100" : "bg-slate-50 text-slate-900"
-      }`}
-    >
+    <div ref={containerRef}>
       <div className="section-reveal">
-        <Navbar isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
-      </div>
-      <div className="section-reveal">
-        <Hero isDarkMode={isDarkMode} />
+        <Hero isDarkMode={isDarkMode} onOpenDownload={onOpenDownload} />
       </div>
       <div className="section-reveal">
         <Services isDarkMode={isDarkMode} />
@@ -46,11 +34,8 @@ export default function Home({ isDarkMode, toggleTheme }) {
         <AIAssistant isDarkMode={isDarkMode} />
       </div>
       <div className="section-reveal">
-        <OfferCarousel isDarkMode={isDarkMode} />
+        <HealthHighlights isDarkMode={isDarkMode} />
       </div>
-      {/* <FloatingCTA /> */}
-      <BottomNavigation isDarkMode={isDarkMode} />
-      <Footer isDarkMode={isDarkMode} />
     </div>
   );
 }

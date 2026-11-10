@@ -1,13 +1,20 @@
 import { motion } from "framer-motion";
 import { FiArrowRight } from "react-icons/fi";
+import { useRouter } from "../../router/routerContext";
+import { ROUTES } from "../../router/routes";
 
 const OfferCard = ({
   title,
   subtitle,
   image,
   button,
-  color,
 }) => {
+  const { navigate } = useRouter();
+
+  const handleOfferClick = () => {
+    navigate(`${ROUTES.CONTACT}?topic=offer&offer=${encodeURIComponent(title)}`);
+  };
+
   return (
     <motion.div
       whileHover={{ y: -10, scale: 1.01 }}
@@ -33,7 +40,11 @@ const OfferCard = ({
           {subtitle}
         </p>
 
-        <button className="mt-8 flex w-fit items-center gap-2 rounded-xl bg-white px-6 py-3 font-semibold text-slate-900 transition hover:scale-105">
+        <button
+          type="button"
+          onClick={handleOfferClick}
+          className="mt-8 flex w-fit items-center gap-2 rounded-xl bg-white px-6 py-3 font-semibold text-slate-900 shadow-sm transition hover:scale-105"
+        >
           {button}
           <FiArrowRight />
         </button>

@@ -5,8 +5,15 @@ import { FaApple, FaGooglePlay, FaStar } from "react-icons/fa";
 import { FiArrowRight } from "react-icons/fi";
 import img from "../assets/images/Untitled-1.jpg";
 
-const Hero = ({ isDarkMode }) => {
+const Hero = ({ isDarkMode, onOpenDownload }) => {
   const heroRef = useRef(null);
+
+  const handleExploreServices = () => {
+    const el = document.getElementById("services");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -73,6 +80,8 @@ const Hero = ({ isDarkMode }) => {
 
           <div className="hero-animate mt-8 flex flex-col gap-3 sm:flex-row">
             <motion.button
+              type="button"
+              onClick={() => onOpenDownload && onOpenDownload("ios")}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
               className={`flex items-center justify-center gap-2 rounded-3xl border px-5 py-3 text-sm shadow-xl transition ${isDarkMode ? "border-slate-700 bg-slate-900 text-white shadow-slate-950/50" : "border-slate-200 bg-slate-900 text-white shadow-[0_20px_35px_rgba(14,165,233,0.18)]"}`}
@@ -85,6 +94,8 @@ const Hero = ({ isDarkMode }) => {
             </motion.button>
 
             <motion.button
+              type="button"
+              onClick={() => onOpenDownload && onOpenDownload("android")}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
               className="flex items-center justify-center gap-2 rounded-3xl bg-gradient-to-r from-sky-500 via-cyan-500 to-sky-400 px-5 py-3 text-white shadow-xl shadow-sky-300/40 transition text-sm"
@@ -98,6 +109,8 @@ const Hero = ({ isDarkMode }) => {
           </div>
 
           <motion.button
+            type="button"
+            onClick={handleExploreServices}
             whileHover={{ x: 4 }}
             className={`hero-animate mt-8 inline-flex items-center gap-2 font-semibold ${isDarkMode ? "text-slate-200 hover:text-white" : "text-slate-900 hover:text-slate-700"}`}
           >

@@ -3,7 +3,7 @@ import { services } from "./servicesData";
 
 const Services = ({ isDarkMode }) => {
   return (
-    <section className={`py-24 transition-colors duration-300 ${isDarkMode ? "bg-slate-950" : "bg-slate-50"}`}>
+    <section id="services" className={`scroll-mt-24 py-24 transition-colors duration-300 ${isDarkMode ? "bg-slate-950" : "bg-slate-50"}`}>
       <div className="mx-auto max-w-7xl px-6">
 
         <div className="text-center">

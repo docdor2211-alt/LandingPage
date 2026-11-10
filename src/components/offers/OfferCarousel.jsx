@@ -8,7 +8,7 @@ import OfferCard from "./OfferCard";
 
 const OfferCarousel = ({ isDarkMode }) => {
   return (
-    <section className={`py-24 transition-colors duration-300 ${isDarkMode ? "bg-slate-950" : "bg-slate-50"}`}>
+    <section id="offers" className={`scroll-mt-24 py-24 transition-colors duration-300 ${isDarkMode ? "bg-slate-950" : "bg-slate-50"}`}>
       <div className="mx-auto max-w-7xl px-6">
 
         <div className="mb-12 text-center">
@@ -18,8 +18,7 @@ const OfferCarousel = ({ isDarkMode }) => {
           </span>
 
           <h2 className={`mt-5 text-4xl font-bold ${isDarkMode ? "text-slate-100" : "text-gray-900"}`}>
-            Explore deals, off
-            ers,
+            Explore deals, offers,
             <br />
             health updates & more
           </h2>
