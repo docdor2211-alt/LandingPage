@@ -10,6 +10,7 @@ import {
   FiRefreshCw,
 } from "react-icons/fi";
 import { FaFlask, FaPills, FaStethoscope } from "react-icons/fa";
+import refundHeroImg from "../assets/images/3.png";
 import LegalPageLayout from "../components/common/LegalPageLayout";
 import Link from "../router/Link";
 import { ROUTES } from "../router/routes";
@@ -203,14 +204,45 @@ const RefundGuidelinesPage = ({ isDarkMode }) => {
     currentService.options.find((opt) => opt.id === scenarioId) ||
     currentService.options[0];
 
+  const scrollToChecker = () => {
+    const el = document.getElementById("refund-checker");
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <LegalPageLayout
       isDarkMode={isDarkMode}
       badge="CANCELLATIONS & REFUNDS"
+      badgeIcon={FiRefreshCw}
       title="Clear, Hassle-Free"
       highlight="Refund Policy"
       subtitle="Know your exact cancellation window, refund percentage, and bank credit timeline across consultations, lab tests, medicine orders, and Care Plans."
       currentPage="Refund Policy"
+      heroVisual={{
+        image: refundHeroImg,
+        alt: "Docdor mobile video consultation and transparent booking experience",
+        objectPosition: "50% 96%",
+        badge: "Fair Cancellation Policy",
+        eyebrow: "Settlement Guarantee",
+        title: "100% Pre-Service Refunds",
+        statValue: "1–3 Days",
+        statLabel: "UPI Credits",
+      }}
+      trustItems={[
+        "100% Pre-Visit Refunds",
+        "Free Slot Rescheduling",
+        "Direct to UPI or Card",
+      ]}
+      heroAction={
+        <button
+          type="button"
+          onClick={scrollToChecker}
+          className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-sky-500 via-cyan-500 to-teal-500 px-4 py-2.5 text-xs sm:text-sm font-semibold text-white shadow-md shadow-sky-500/20 transition hover:brightness-105 cursor-pointer"
+        >
+          <span>Check Refund Eligibility</span>
+          <FiArrowRight size={14} />
+        </button>
+      }
       summaryCards={[
         {
           icon: <FiRefreshCw size={20} />,
@@ -231,7 +263,8 @@ const RefundGuidelinesPage = ({ isDarkMode }) => {
       sections={REFUND_SECTIONS}
       topBanner={
         <div
-          className={`print:hidden rounded-[2rem] border p-6 sm:p-8 ${
+          id="refund-checker"
+          className={`print:hidden scroll-mt-24 rounded-[2rem] border p-6 sm:p-8 ${
             isDarkMode
               ? "border-sky-500/30 bg-slate-900/95"
               : "border-slate-200/80 bg-white shadow-[0_20px_50px_rgba(14,165,233,0.1)]"

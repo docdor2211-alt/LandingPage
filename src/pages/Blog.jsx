@@ -2,13 +2,16 @@ import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import {
   FiArrowRight,
+  FiBookOpen,
   FiBookmark,
   FiCalendar,
   FiCheck,
   FiClock,
+  FiMail,
   FiSearch,
   FiX,
 } from "react-icons/fi";
+import labReportImg from "../assets/images/Labtest.png";
 import CardImage from "../components/common/CardImage";
 import PageHero from "../components/common/PageHero";
 import Link from "../router/Link";
@@ -112,17 +115,60 @@ const Blog = ({ isDarkMode }) => {
     setNewsletterEmail("");
   };
 
+  const scrollToNewsletter = () => {
+    const el = document.getElementById("newsletter-digest");
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <div>
       <PageHero
         isDarkMode={isDarkMode}
         badge="DOCDOR HEALTH JOURNAL"
+        badgeIcon={FiBookOpen}
         title="Doctor-Reviewed Guides for"
         highlight="Everyday Preventive Care"
         subtitle="Practical, jargon-free articles on diagnostics, medication safety, digital health AI, nutrition, and family wellness written by Docdor clinicians."
         breadcrumbGroup="Company"
         currentPage="Blog"
-      />
+        visual={{
+          image: labReportImg,
+          alt: "Clinician reviewing diagnostic test reports for patient education",
+          objectPosition: "50% 40%",
+          badge: "Physician Reviewed",
+          eyebrow: "Clinical Editorial",
+          title: "Diagnostics, AI & Preventive Care",
+          statValue: `${BLOG_POSTS.length} Guides`,
+          statLabel: "Clinician Written",
+        }}
+        trustItems={[
+          "Doctor Fact-Checked",
+          "Jargon-Free Explanations",
+          "Weekly Digest",
+        ]}
+      >
+        <div className="flex flex-wrap gap-3">
+          <Link
+            to={getBlogPostRoute(featuredPost.id)}
+            className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-sky-500 via-cyan-500 to-teal-500 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-sky-500/25 transition hover:brightness-105"
+          >
+            <span>Read Featured Guide</span>
+            <FiArrowRight />
+          </Link>
+          <button
+            type="button"
+            onClick={scrollToNewsletter}
+            className={`inline-flex items-center gap-2 rounded-2xl border px-5 py-3 text-sm font-semibold transition cursor-pointer ${
+              isDarkMode
+                ? "border-slate-700 bg-slate-800/80 text-slate-100 hover:border-sky-500/50"
+                : "border-slate-200 bg-white text-slate-800 hover:border-sky-300 shadow-xs"
+            }`}
+          >
+            <FiMail size={15} className="text-sky-500" />
+            <span>Weekly Wellness Digest</span>
+          </button>
+        </div>
+      </PageHero>
 
       <div className="mx-auto max-w-7xl px-6 py-12 md:py-16">
         {/* Featured Article Spotlight */}
@@ -441,7 +487,8 @@ const Blog = ({ isDarkMode }) => {
 
         {/* Wellness Newsletter Banner */}
         <section
-          className={`relative mt-16 overflow-hidden rounded-[2rem] border p-8 sm:p-10 ${
+          id="newsletter-digest"
+          className={`relative mt-16 scroll-mt-24 overflow-hidden rounded-[2rem] border p-8 sm:p-10 ${
             isDarkMode
               ? "border-sky-500/30 bg-gradient-to-r from-slate-900 via-[#0C162C] to-slate-900"
               : "border-slate-900/5 bg-slate-900 text-white shadow-2xl shadow-slate-900/15"

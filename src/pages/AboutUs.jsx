@@ -80,84 +80,39 @@ const AboutUs = ({ isDarkMode }) => {
       <PageHero
         isDarkMode={isDarkMode}
         badge="ABOUT DOCDOR"
+        badgeIcon={FiHeart}
         title="Reimagining Everyday"
         highlight="Healthcare Around Patients"
         subtitle="Docdor brings verified doctors, NABL diagnostic labs, doorstep pharmacies, and physician-reviewed AI assistance into one calm, trusted digital health ecosystem."
         breadcrumbGroup="Company"
         currentPage="About Us"
-        rightContent={
-          <div className="relative">
-            <div
-              className={`pointer-events-none absolute -inset-4 rounded-[2.5rem] blur-2xl ${
-                isDarkMode
-                  ? "bg-gradient-to-tr from-sky-500/20 via-cyan-500/10 to-teal-500/15"
-                  : "bg-gradient-to-tr from-sky-200/60 via-cyan-100/50 to-teal-100/50"
-              }`}
-            />
-            <div
-              className={`relative overflow-hidden rounded-[2rem] border p-3.5 sm:p-4 shadow-2xl ${
-                isDarkMode
-                  ? "border-slate-700/80 bg-slate-900/95 shadow-black/50"
-                  : "border-sky-200/80 bg-white/95 shadow-[0_24px_60px_rgba(14,165,233,0.16)]"
-              }`}
-            >
-              <div className="relative h-72 sm:h-80 w-full overflow-hidden rounded-[1.5rem] bg-sky-50 dark:bg-slate-800">
-                <CardImage
-                  src={heroDoc}
-                  alt="Docdor senior physician consulting"
-                  objectPosition="50% 16%"
-                  loading="eager"
-                  isDarkMode={isDarkMode}
-                />
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-slate-950/55 via-slate-950/15 to-transparent" />
-                <span
-                  className={`absolute right-3.5 top-3.5 inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[11px] font-bold backdrop-blur-md ${
-                    isDarkMode
-                      ? "border-emerald-400/30 bg-slate-950/80 text-emerald-300"
-                      : "border-white/70 bg-white/90 text-emerald-700 shadow-sm"
-                  }`}
-                >
-                  NMC Verified Panel
-                </span>
-              </div>
-
-              <div
-                className={`mt-3.5 flex items-center justify-between gap-3 rounded-2xl border px-4 py-3 ${
-                  isDarkMode
-                    ? "border-slate-800 bg-slate-800/75"
-                    : "border-sky-100 bg-sky-50/75"
-                }`}
-              >
-                <div>
-                  <p className="text-[11px] font-bold uppercase tracking-wider text-sky-500">
-                    Patient Satisfaction
-                  </p>
-                  <p className="text-base sm:text-lg font-extrabold tabular-nums">
-                    4.9 / 5.0 Verified Rating
-                  </p>
-                </div>
-                <div className="text-right">
-                  <p className="text-xs font-bold tabular-nums">500+</p>
-                  <p className={`text-[11px] ${isDarkMode ? "text-slate-400" : "text-slate-500"}`}>
-                    Clinicians
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        }
+        visual={{
+          image: heroDoc,
+          alt: "Docdor senior physician consulting",
+          objectPosition: "50% 16%",
+          badge: "NMC Verified Panel",
+          eyebrow: "Patient Satisfaction",
+          title: "4.9 / 5.0 Verified Rating",
+          statValue: "500+",
+          statLabel: "Clinicians",
+        }}
+        trustItems={[
+          "Founded in Indore (2022)",
+          "50K+ Patients Served",
+          "120+ NABL Partner Labs",
+        ]}
       >
         <div className="flex flex-wrap gap-3">
           <Link
             to={ROUTES.CAREERS}
-            className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-sky-500 via-cyan-500 to-teal-500 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-sky-500/25 transition hover:brightness-105"
+            className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-sky-500 via-cyan-500 to-teal-500 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-sky-500/25 transition hover:brightness-105"
           >
             <span>Join Our Team</span>
             <FiArrowRight />
           </Link>
           <Link
             to={ROUTES.CONTACT}
-            className={`inline-flex items-center gap-2 rounded-2xl border px-6 py-3.5 text-sm font-semibold transition ${
+            className={`inline-flex items-center gap-2 rounded-2xl border px-5 py-3 text-sm font-semibold transition ${
               isDarkMode
                 ? "border-slate-700 bg-slate-800/80 text-slate-100 hover:border-sky-500/50"
                 : "border-slate-200 bg-white text-slate-900 hover:border-sky-300 shadow-xs"

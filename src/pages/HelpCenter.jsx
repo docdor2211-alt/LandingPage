@@ -5,6 +5,7 @@ import {
   FiCheck,
   FiChevronDown,
   FiCreditCard,
+  FiHelpCircle,
   FiMessageSquare,
   FiSearch,
   FiShield,
@@ -13,6 +14,7 @@ import {
   FiX,
 } from "react-icons/fi";
 import { FaFlask, FaPills, FaRobot, FaStethoscope } from "react-icons/fa";
+import helpHeroImg from "../assets/images/on1.png";
 import PageHero from "../components/common/PageHero";
 import Link from "../router/Link";
 import { ROUTES } from "../router/routes";
@@ -89,14 +91,25 @@ const HelpCenter = ({ isDarkMode }) => {
       <PageHero
         isDarkMode={isDarkMode}
         badge="DOCDOR HELP CENTER"
+        badgeIcon={FiHelpCircle}
         title="How Can We"
         highlight="Help You Today?"
         subtitle="Find clear answers on booking doctors, preparing for home lab tests, tracking pharmacy orders, managing Care Plan, and requesting refunds."
         breadcrumbGroup="Support"
         currentPage="Help Center"
+        visual={{
+          image: helpHeroImg,
+          alt: "Docdor physician offering patient support guidance",
+          objectPosition: "50% 18%",
+          badge: "24/7 Care Support",
+          eyebrow: "Instant Patient Desk",
+          title: "Appointments, Labs & Orders",
+          statValue: "< 2 hrs",
+          statLabel: "Email Reply",
+        }}
       >
         {/* Prominent Search Box */}
-        <div className="max-w-2xl">
+        <div className="max-w-xl">
           <div className="relative">
             <FiSearch
               className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
@@ -108,7 +121,7 @@ const HelpCenter = ({ isDarkMode }) => {
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search questions (e.g., refund, fasting, prescription, Care Plan)..."
               aria-label="Search help articles and FAQs"
-              className={`w-full rounded-2xl border py-4 pl-12 pr-11 text-sm sm:text-base shadow-lg focus:outline-none focus:ring-2 transition ${
+              className={`w-full rounded-2xl border py-3.5 pl-12 pr-11 text-sm sm:text-base shadow-lg focus:outline-none focus:ring-2 transition ${
                 isDarkMode
                   ? "border-slate-700 bg-slate-900/90 text-slate-100 placeholder:text-slate-500 focus:border-sky-500 focus:ring-sky-500/30"
                   : "border-sky-200 bg-white text-slate-900 placeholder:text-slate-400 focus:border-sky-400 focus:ring-sky-400/25 shadow-sky-200/40"

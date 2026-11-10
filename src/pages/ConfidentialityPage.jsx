@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { FiCheck, FiDatabase, FiLock, FiShield } from "react-icons/fi";
+import { FiCheck, FiDatabase, FiLock, FiShield, FiSliders } from "react-icons/fi";
+import privacyHeroImg from "../assets/images/9.png";
 import LegalPageLayout from "../components/common/LegalPageLayout";
 
 const DATA_PROTECTION_SECTIONS = [
@@ -155,14 +156,45 @@ const ConfidentialityPage = ({ isDarkMode }) => {
     window.setTimeout(() => setPrefsSaved(false), 2500);
   };
 
+  const scrollToPrivacyControls = () => {
+    const el = document.getElementById("privacy-controls");
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <LegalPageLayout
       isDarkMode={isDarkMode}
       badge="PRIVACY & DATA PROTECTION"
+      badgeIcon={FiLock}
       title="Your Health Data,"
       highlight="Protected & Under Your Control"
       subtitle="We treat every symptom note, prescription, and diagnostic report with medical-grade confidentiality. Here is exactly what we collect and how we safeguard it."
       currentPage="Privacy Policy"
+      heroVisual={{
+        image: privacyHeroImg,
+        alt: "Clinician caring for patient with strict confidentiality",
+        objectPosition: "50% 58%",
+        badge: "Patient Data Protection",
+        eyebrow: "Security Architecture",
+        title: "TLS 1.3 & AES-256 Vault",
+        statValue: "Zero",
+        statLabel: "Ad Sharing",
+      }}
+      trustItems={[
+        "End-to-End Encrypted Records",
+        "Zero Third-Party Ad Sales",
+        "One-Click Data Export",
+      ]}
+      heroAction={
+        <button
+          type="button"
+          onClick={scrollToPrivacyControls}
+          className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-sky-500 via-cyan-500 to-teal-500 px-4 py-2.5 text-xs sm:text-sm font-semibold text-white shadow-md shadow-sky-500/20 transition hover:brightness-105 cursor-pointer"
+        >
+          <FiSliders size={14} />
+          <span>Manage Privacy Controls</span>
+        </button>
+      }
       summaryCards={[
         {
           icon: <FiLock size={20} />,
@@ -186,7 +218,8 @@ const ConfidentialityPage = ({ isDarkMode }) => {
       sections={DATA_PROTECTION_SECTIONS}
       topBanner={
         <div
-          className={`print:hidden rounded-3xl border p-6 sm:p-7 ${
+          id="privacy-controls"
+          className={`print:hidden scroll-mt-24 rounded-3xl border p-6 sm:p-7 ${
             isDarkMode
               ? "border-slate-800 bg-slate-900/95"
               : "border-slate-200/80 bg-white shadow-sm"

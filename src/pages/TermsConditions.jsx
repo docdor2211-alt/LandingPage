@@ -1,4 +1,5 @@
 import { FiAlertCircle, FiCheckCircle, FiFileText, FiShield } from "react-icons/fi";
+import termsHeroImg from "../assets/images/4.png";
 import LegalPageLayout from "../components/common/LegalPageLayout";
 
 const TERMS_SECTIONS = [
@@ -90,10 +91,26 @@ const TermsConditions = ({ isDarkMode }) => {
     <LegalPageLayout
       isDarkMode={isDarkMode}
       badge="TERMS OF SERVICE"
+      badgeIcon={FiShield}
       title="Terms &"
       highlight="Conditions"
       subtitle="Clear, transparent rules governing consultations, e-pharmacy orders, diagnostic tests, AI wellness tools, and Care Plan memberships on Docdor."
       currentPage="Terms & Conditions"
+      heroVisual={{
+        image: termsHeroImg,
+        alt: "Doctor reviewing medical records and clinical standards",
+        objectPosition: "50% 70%",
+        badge: "Clinical Governance",
+        eyebrow: "Platform Standards",
+        title: "Verified NMC & NABL Network",
+        statValue: "100%",
+        statLabel: "Credentialed",
+      }}
+      trustItems={[
+        "NMC-Verified Physicians",
+        "Pharmacist-Checked Prescriptions",
+        "Clear Care Plan Terms",
+      ]}
       summaryCards={[
         {
           icon: <FiCheckCircle size={20} />,

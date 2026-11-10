@@ -18,6 +18,7 @@ import {
 } from "react-icons/fi";
 import PageHero from "../components/common/PageHero";
 import { JOB_OPENINGS } from "../data/siteData";
+import careersHeroImg from "../assets/images/on1.png";
 
 const PERKS = [
   {
@@ -154,6 +155,11 @@ const Careers = ({ isDarkMode }) => {
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
+  const scrollToPerks = () => {
+    const el = document.getElementById("careers-perks");
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
+
   const pillBadgeClass = isDarkMode
     ? "border-sky-500/30 bg-sky-500/10 text-sky-300"
     : "border-sky-200 bg-sky-50 text-sky-700";
@@ -169,29 +175,53 @@ const Careers = ({ isDarkMode }) => {
       <PageHero
         isDarkMode={isDarkMode}
         badge="CAREERS AT DOCDOR"
+        badgeIcon={FiBriefcase}
         title="Build Healthcare That"
         highlight="Patients Truly Trust"
         subtitle="We are physicians, engineers, designers, and operations builders working together to make preventive and acute healthcare accessible across India."
         breadcrumbGroup="Company"
         currentPage="Careers"
+        visual={{
+          image: careersHeroImg,
+          alt: "Docdor clinical leader collaborating on digital patient care",
+          objectPosition: "50% 16%",
+          badge: "Hybrid & Remote",
+          eyebrow: "Clinical & Product Team",
+          title: "Indore • Bengaluru • Mumbai",
+          statValue: `${JOB_OPENINGS.length} Roles`,
+          statLabel: "Open Now",
+        }}
+        trustItems={[
+          "Family Care Coverage",
+          "Remote Clinical Roles",
+          "Learning Stipends",
+        ]}
       >
-        <div className="flex flex-wrap items-center gap-4">
+        <div className="flex flex-wrap items-center gap-3">
           <button
             type="button"
             onClick={scrollToRoles}
-            className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-sky-500 via-cyan-500 to-teal-500 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-sky-500/25 transition hover:brightness-105 cursor-pointer"
+            className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-sky-500 via-cyan-500 to-teal-500 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-sky-500/25 transition hover:brightness-105 cursor-pointer"
           >
             <span>Explore {JOB_OPENINGS.length} Open Roles</span>
             <FiArrowRight />
           </button>
-          <span className={`text-sm font-medium ${isDarkMode ? "text-slate-400" : "text-slate-600"}`}>
-            Indore • Bengaluru • Mumbai • Remote
-          </span>
+          <button
+            type="button"
+            onClick={scrollToPerks}
+            className={`inline-flex items-center gap-2 rounded-2xl border px-5 py-3 text-sm font-semibold transition cursor-pointer ${
+              isDarkMode
+                ? "border-slate-700 bg-slate-800/80 text-slate-100 hover:border-sky-500/50"
+                : "border-slate-200 bg-white text-slate-800 hover:border-sky-300 shadow-xs"
+            }`}
+          >
+            <span>Benefits &amp; Culture</span>
+          </button>
         </div>
       </PageHero>
 
       {/* Perks & Culture */}
-      <section className="mx-auto max-w-7xl px-6 py-14 md:py-16">
+      <section id="careers-perks" className="mx-auto max-w-7xl scroll-mt-24 px-6 py-14 md:py-16">
         <div className="max-w-2xl">
           <span
             className={`inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-bold uppercase tracking-[0.14em] ${pillBadgeClass}`}

@@ -7,12 +7,16 @@ import { ROUTES } from "../../router/routes";
 const LegalPageLayout = ({
   isDarkMode,
   badge,
+  badgeIcon,
   title,
   highlight,
   subtitle,
   currentPage,
   effectiveDate = "November 10, 2026",
   version = "Version 2.4",
+  heroVisual,
+  trustItems,
+  heroAction,
   summaryCards = [],
   sections = [],
   topBanner,
@@ -62,45 +66,56 @@ const LegalPageLayout = ({
       <PageHero
         isDarkMode={isDarkMode}
         badge={badge}
+        badgeIcon={badgeIcon}
         title={title}
         highlight={highlight}
         subtitle={subtitle}
         breadcrumbGroup="Support"
         currentPage={currentPage}
+        visual={heroVisual}
+        trustItems={trustItems}
       >
-        <div className="flex flex-wrap items-center gap-3">
-          <span
-            className={`inline-flex items-center gap-2 rounded-xl border px-3.5 py-2 text-xs sm:text-sm font-medium ${
-              isDarkMode
-                ? "border-slate-700 bg-slate-800/80 text-slate-300"
-                : "border-sky-200 bg-white/95 text-slate-700"
-            }`}
-          >
-            <FiCalendar className="text-sky-500" />
-            Effective: {effectiveDate}
-          </span>
-          <span
-            className={`inline-flex items-center gap-2 rounded-xl border px-3.5 py-2 text-xs sm:text-sm font-medium tabular-nums ${
-              isDarkMode
-                ? "border-slate-700 bg-slate-800/80 text-slate-300"
-                : "border-sky-200 bg-white/95 text-slate-700"
-            }`}
-          >
-            <FiFileText className="text-sky-500" />
-            {version}
-          </span>
-          <button
-            type="button"
-            onClick={() => window.print()}
-            className={`print:hidden inline-flex items-center gap-2 rounded-xl border px-3.5 py-2 text-xs sm:text-sm font-semibold transition cursor-pointer ${
-              isDarkMode
-                ? "border-slate-700 bg-slate-800/80 text-slate-200 hover:border-sky-500/60 hover:bg-slate-800"
-                : "border-slate-200 bg-white text-slate-800 hover:border-sky-300 hover:bg-sky-50 shadow-xs"
-            }`}
-          >
-            <FiPrinter className="text-sky-500" />
-            <span>Print / Save PDF</span>
-          </button>
+        <div className="flex flex-col gap-3.5">
+          <div className="print:hidden flex flex-wrap items-center gap-3">
+            {heroAction}
+            <button
+              type="button"
+              onClick={() => window.print()}
+              className={`inline-flex items-center gap-2 rounded-2xl px-4 py-2.5 text-xs sm:text-sm font-semibold transition cursor-pointer ${
+                heroAction
+                  ? isDarkMode
+                    ? "border border-slate-700 bg-slate-800/80 text-slate-200 hover:border-sky-500/60 hover:bg-slate-800"
+                    : "border border-slate-200 bg-white text-slate-800 hover:border-sky-300 hover:bg-sky-50 shadow-2xs"
+                  : "bg-gradient-to-r from-sky-500 via-cyan-500 to-teal-500 text-white shadow-md shadow-sky-500/20 hover:brightness-105"
+              }`}
+            >
+              <FiPrinter size={14} />
+              <span>Print / Save PDF</span>
+            </button>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2.5 text-xs">
+            <span
+              className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 font-medium ${
+                isDarkMode
+                  ? "bg-slate-800/80 text-slate-300"
+                  : "bg-sky-100/60 text-slate-700"
+              }`}
+            >
+              <FiCalendar size={12} className="text-sky-500" />
+              Effective: {effectiveDate}
+            </span>
+            <span
+              className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 font-medium tabular-nums ${
+                isDarkMode
+                  ? "bg-slate-800/80 text-slate-300"
+                  : "bg-sky-100/60 text-slate-700"
+              }`}
+            >
+              <FiFileText size={12} className="text-sky-500" />
+              {version}
+            </span>
+          </div>
         </div>
       </PageHero>
 

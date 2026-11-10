@@ -17,6 +17,7 @@ import Link from "../router/Link";
 import { useRouter } from "../router/routerContext";
 import { ROUTES } from "../router/routes";
 import { CITY_HUBS } from "../data/siteData";
+import contactHeroImg from "../assets/images/1.png";
 
 const TOPIC_MAP = {
   "care-plan": "Care Plan Membership",
@@ -151,11 +152,27 @@ const Contact = ({ isDarkMode }) => {
       <PageHero
         isDarkMode={isDarkMode}
         badge="24/7 PATIENT & PARTNER DESK"
+        badgeIcon={FiPhone}
         title="We're Here for Your"
         highlight="Care & Support Needs"
         subtitle="Reach our care coordinators for appointment assistance, pharmacy tracking, billing questions, or hospital and diagnostic partnerships."
         breadcrumbGroup="Company"
         currentPage="Contact"
+        visual={{
+          image: contactHeroImg,
+          alt: "Doctor greeting patient at Docdor partner consultation hub",
+          objectPosition: "50% 72%",
+          badge: "4 City Care Hubs",
+          eyebrow: "Patient & Partner Desk",
+          title: "Indore • Bhopal • Mumbai • BLR",
+          statValue: "< 2 min",
+          statLabel: "Helpline Wait",
+        }}
+        trustItems={[
+          "24/7 Patient Helpline",
+          "Replies Under 2 Hours",
+          "Clinic & Lab Partnerships",
+        ]}
       >
         <div className="flex flex-wrap gap-3">
           <a
