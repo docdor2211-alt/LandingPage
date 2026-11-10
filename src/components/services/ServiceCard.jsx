@@ -6,7 +6,6 @@ import { ROUTES } from "../../router/routes";
 const ServiceCard = ({
   isDarkMode,
   title,
-  category,
   description,
   image,
   badge,
@@ -31,11 +30,6 @@ const ServiceCard = ({
           className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/35 via-transparent to-transparent" />
-
-        {/* Category Pill */}
-        <span className="absolute left-4 top-4 rounded-full bg-slate-950/70 px-3 py-1 text-[11px] font-semibold text-white backdrop-blur-md">
-          {category}
-        </span>
 
         {/* Badge / Free Tag */}
         {badge && (
