@@ -103,7 +103,8 @@ const TermsConditions = ({ isDarkMode }) => {
         {
           icon: <FiFileText size={20} />,
           title: "Prescription Compliance",
-          description: "Schedule H/H1 medicines require a valid doctor prescription verified by pharmacists.",
+          description:
+            "Schedule H/H1 medicines require a valid doctor prescription verified by pharmacists.",
         },
         {
           icon: <FiShield size={20} />,
@@ -117,14 +118,17 @@ const TermsConditions = ({ isDarkMode }) => {
           className={`flex items-start gap-3.5 rounded-3xl border p-5 sm:p-6 ${
             isDarkMode
               ? "border-amber-500/30 bg-amber-500/10 text-amber-200"
-              : "border-amber-200 bg-amber-50 text-amber-950"
+              : "border-amber-200 bg-amber-50/90 text-amber-950"
           }`}
         >
-          <FiAlertCircle className="mt-0.5 shrink-0 text-amber-500" size={22} />
+          <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-amber-500/15 text-amber-500">
+            <FiAlertCircle size={20} />
+          </div>
           <div className="text-sm leading-relaxed">
-            <p className="font-bold">Important Clinical & Emergency Disclaimer</p>
+            <p className="font-bold">Important Clinical &amp; Emergency Disclaimer</p>
             <p className="mt-1">
-              Docdor&apos;s AI Health Assistant and digital articles are designed for informational support and care navigation—not emergency medicine. In a medical emergency, call <strong>108 / 112</strong> or visit the nearest hospital emergency department immediately.
+              Docdor&apos;s AI Health Assistant and digital articles are designed for informational support and care navigation—not emergency medicine. In a medical emergency, call{" "}
+              <strong className="font-extrabold">108 / 112</strong> or visit the nearest hospital emergency department immediately.
             </p>
           </div>
         </div>
@@ -134,4 +138,3 @@ const TermsConditions = ({ isDarkMode }) => {
 };
 
 export default TermsConditions;
-

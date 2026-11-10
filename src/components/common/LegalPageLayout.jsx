@@ -73,17 +73,17 @@ const LegalPageLayout = ({
             className={`inline-flex items-center gap-2 rounded-xl border px-3.5 py-2 text-xs sm:text-sm font-medium ${
               isDarkMode
                 ? "border-slate-700 bg-slate-800/80 text-slate-300"
-                : "border-sky-200 bg-white/90 text-slate-700"
+                : "border-sky-200 bg-white/95 text-slate-700"
             }`}
           >
             <FiCalendar className="text-sky-500" />
             Effective: {effectiveDate}
           </span>
           <span
-            className={`inline-flex items-center gap-2 rounded-xl border px-3.5 py-2 text-xs sm:text-sm font-medium ${
+            className={`inline-flex items-center gap-2 rounded-xl border px-3.5 py-2 text-xs sm:text-sm font-medium tabular-nums ${
               isDarkMode
                 ? "border-slate-700 bg-slate-800/80 text-slate-300"
-                : "border-sky-200 bg-white/90 text-slate-700"
+                : "border-sky-200 bg-white/95 text-slate-700"
             }`}
           >
             <FiFileText className="text-sky-500" />
@@ -92,14 +92,14 @@ const LegalPageLayout = ({
           <button
             type="button"
             onClick={() => window.print()}
-            className={`inline-flex items-center gap-2 rounded-xl border px-3.5 py-2 text-xs sm:text-sm font-semibold transition ${
+            className={`print:hidden inline-flex items-center gap-2 rounded-xl border px-3.5 py-2 text-xs sm:text-sm font-semibold transition cursor-pointer ${
               isDarkMode
                 ? "border-slate-700 bg-slate-800/80 text-slate-200 hover:border-sky-500/60 hover:bg-slate-800"
-                : "border-slate-200 bg-white text-slate-800 hover:border-sky-300 hover:bg-sky-50"
+                : "border-slate-200 bg-white text-slate-800 hover:border-sky-300 hover:bg-sky-50 shadow-xs"
             }`}
           >
             <FiPrinter className="text-sky-500" />
-            Print / Save PDF
+            <span>Print / Save PDF</span>
           </button>
         </div>
       </PageHero>
@@ -110,13 +110,13 @@ const LegalPageLayout = ({
             {summaryCards.map((card) => (
               <div
                 key={card.title}
-                className={`rounded-2xl border p-5 transition-colors ${
+                className={`rounded-3xl border p-6 transition-colors ${
                   isDarkMode
                     ? "border-slate-800 bg-slate-900/90"
-                    : "border-sky-100 bg-white shadow-[0_12px_30px_rgba(56,189,248,0.08)]"
+                    : "border-slate-200/80 bg-white shadow-[0_12px_30px_rgba(14,165,233,0.07)]"
                 }`}
               >
-                <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-sky-500/15 text-sky-500">
+                <div className="mb-3.5 inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-500/20 to-teal-500/15 text-sky-500">
                   {card.icon}
                 </div>
                 <h2 className="text-base font-bold">{card.title}</h2>
@@ -134,14 +134,14 @@ const LegalPageLayout = ({
 
         {topBanner && <div className="mb-10">{topBanner}</div>}
 
-        <div className="grid gap-10 lg:grid-cols-12 items-start">
+        <div className="grid gap-10 lg:grid-cols-12 print:block items-start">
           {/* Table of Contents */}
-          <aside className="lg:col-span-4 lg:sticky lg:top-28 space-y-5">
+          <aside className="print:hidden lg:col-span-4 lg:sticky lg:top-28 space-y-5">
             <div
               className={`rounded-3xl border p-5 ${
                 isDarkMode
                   ? "border-slate-800 bg-slate-900/90"
-                  : "border-slate-200 bg-white shadow-sm"
+                  : "border-slate-200/80 bg-white shadow-sm"
               }`}
             >
               <p className="text-xs font-bold uppercase tracking-wider text-sky-500">
@@ -155,7 +155,7 @@ const LegalPageLayout = ({
                       <button
                         type="button"
                         onClick={() => scrollToSection(section.id)}
-                        className={`flex w-full items-center gap-2.5 rounded-xl px-3 py-2 text-left text-sm transition ${
+                        className={`flex w-full items-center gap-2.5 rounded-xl px-3 py-2 text-left text-sm transition cursor-pointer ${
                           active
                             ? isDarkMode
                               ? "bg-sky-500/15 text-sky-300 font-semibold"
@@ -165,8 +165,14 @@ const LegalPageLayout = ({
                               : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
                         }`}
                       >
-                        <span className="text-xs opacity-60">{String(idx + 1).padStart(2, "0")}</span>
-                        <span className="truncate">{section.title}</span>
+                        <span
+                          className={`text-xs tabular-nums ${
+                            active ? "text-sky-500 font-bold" : "opacity-60"
+                          }`}
+                        >
+                          {String(idx + 1).padStart(2, "0")}
+                        </span>
+                        <span className="truncate flex-1">{section.title}</span>
                       </button>
                     </li>
                   );
@@ -191,7 +197,7 @@ const LegalPageLayout = ({
               </p>
               <Link
                 to={`${ROUTES.CONTACT}?topic=policy`}
-                className="mt-4 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-sky-500 to-cyan-500 px-4 py-2.5 text-xs font-semibold text-white shadow-md shadow-sky-500/20 transition hover:opacity-95"
+                className="mt-4 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-sky-500 to-teal-500 px-4 py-2.5 text-xs font-semibold text-white shadow-md shadow-sky-500/20 transition hover:brightness-105"
               >
                 <span>Contact Support</span>
                 <FiArrowRight />
@@ -200,7 +206,7 @@ const LegalPageLayout = ({
           </aside>
 
           {/* Main Document Body */}
-          <div className="lg:col-span-8 space-y-6">
+          <div className="lg:col-span-8 lg:print:col-span-12 space-y-6">
             {children}
 
             {sections.map((section, idx) => (
@@ -214,10 +220,10 @@ const LegalPageLayout = ({
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-sky-500/15 text-xs font-bold text-sky-500">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-sky-500/20 to-teal-500/15 text-xs font-extrabold tabular-nums text-sky-500">
                     {idx + 1}
                   </span>
-                  <h2 className="text-xl sm:text-2xl font-bold">{section.title}</h2>
+                  <h2 className="text-xl sm:text-2xl font-extrabold">{section.title}</h2>
                 </div>
 
                 <div
@@ -230,7 +236,7 @@ const LegalPageLayout = ({
                   ))}
 
                   {section.bullets && (
-                    <ul className="mt-3 space-y-2 pl-1">
+                    <ul className="mt-3 space-y-2.5 pl-1">
                       {section.bullets.map((bullet, bIdx) => (
                         <li key={bIdx} className="flex items-start gap-2.5">
                           <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-sky-500" />
@@ -245,14 +251,14 @@ const LegalPageLayout = ({
 
             {/* Cross-links to related policies */}
             <div
-              className={`rounded-3xl border p-6 ${
+              className={`print:hidden rounded-3xl border p-6 ${
                 isDarkMode
                   ? "border-slate-800 bg-slate-900/90"
-                  : "border-slate-200 bg-white"
+                  : "border-slate-200/80 bg-white"
               }`}
             >
               <p className="text-xs font-bold uppercase tracking-wider text-sky-500">
-                Related Support & Policies
+                Related Support &amp; Policies
               </p>
               <div className="mt-4 grid gap-3 sm:grid-cols-3">
                 {relatedPolicies.map((item) => (
@@ -262,11 +268,11 @@ const LegalPageLayout = ({
                     className={`group flex items-center justify-between rounded-2xl border px-4 py-3 text-sm font-semibold transition ${
                       isDarkMode
                         ? "border-slate-800 bg-slate-800/60 text-slate-200 hover:border-sky-500/50"
-                        : "border-slate-200 bg-slate-50 text-slate-800 hover:border-sky-300 hover:bg-sky-50/50"
+                        : "border-slate-200/80 bg-slate-50 text-slate-800 hover:border-sky-300 hover:bg-sky-50/50"
                     }`}
                   >
                     <span>{item.label}</span>
-                    <FiArrowRight className="transition-transform group-hover:translate-x-1 text-sky-500" />
+                    <FiArrowRight className="text-sky-500 transition-transform group-hover:translate-x-1" />
                   </Link>
                 ))}
               </div>
@@ -279,4 +285,3 @@ const LegalPageLayout = ({
 };
 
 export default LegalPageLayout;
-

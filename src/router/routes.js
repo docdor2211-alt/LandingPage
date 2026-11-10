@@ -70,7 +70,25 @@ export const normalizePathname = (rawPath = "/") => {
   const trimmed = rawPath.trim() || "/";
   const lower = trimmed.toLowerCase();
   const withoutTrailing = lower.length > 1 ? lower.replace(/\/+$/, "") : lower;
+  if (withoutTrailing.startsWith("/blogs/")) {
+    return `${ROUTES.BLOG}/${withoutTrailing.slice("/blogs/".length)}`;
+  }
   return ROUTE_ALIASES[withoutTrailing] || withoutTrailing;
+};
+
+export const getBlogPostRoute = (slug) =>
+  `${ROUTES.BLOG}/${encodeURIComponent(slug)}`;
+
+export const matchBlogSlug = (rawPath = "/") => {
+  const normalized = normalizePathname(rawPath);
+  if (!normalized.startsWith(`${ROUTES.BLOG}/`)) return null;
+  const rawSlug = normalized.slice(ROUTES.BLOG.length + 1);
+  if (!rawSlug || rawSlug.includes("/")) return null;
+  try {
+    return decodeURIComponent(rawSlug);
+  } catch {
+    return rawSlug;
+  }
 };
 
 export const COMPANY_LINKS = [
@@ -86,4 +104,3 @@ export const SUPPORT_LINKS = [
   { label: "Terms & Conditions", to: ROUTES.TERMS_CONDITIONS, description: "Platform terms & clinical disclaimers" },
   { label: "Refund Policy", to: ROUTES.REFUND_POLICY, description: "Cancellations, timelines & eligibility" },
 ];
-

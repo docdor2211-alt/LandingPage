@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import RouterProvider from "./router/RouterProvider";
 import { useRouter } from "./router/routerContext";
-import { ROUTES } from "./router/routes";
+import { matchBlogSlug, ROUTES } from "./router/routes";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer/Footer";
 import BottomNavigation from "./components/BottomNavigation/BottomNavigation";
+import FloatingCTA from "./components/FloatingCTA/FloatingCTA";
 import CarePlanModal from "./components/common/CarePlanModal";
 import AppDownloadModal from "./components/common/AppDownloadModal";
 import Home from "./pages/Home";
@@ -12,6 +13,7 @@ import AboutUs from "./pages/AboutUs";
 import Contact from "./pages/Contact";
 import Careers from "./pages/Careers";
 import Blog from "./pages/Blog";
+import BlogDetail from "./pages/BlogDetail";
 import HelpCenter from "./pages/HelpCenter";
 import PrivacyPolicy from "./pages/ConfidentialityPage";
 import TermsConditions from "./pages/TermsConditions";
@@ -52,12 +54,18 @@ const AppShell = () => {
   };
 
   const renderPage = () => {
+    const blogSlug = matchBlogSlug(pathname);
+    if (blogSlug) {
+      return <BlogDetail key={blogSlug} isDarkMode={isDarkMode} slug={blogSlug} />;
+    }
+
     switch (pathname) {
       case ROUTES.HOME:
         return (
           <Home
             isDarkMode={isDarkMode}
             onOpenDownload={(platform) => setDownloadPlatform(platform)}
+            onOpenCarePlan={() => setCarePlanOpen(true)}
           />
         );
       case ROUTES.ABOUT_US:
@@ -84,7 +92,7 @@ const AppShell = () => {
   return (
     <div
       className={`min-h-screen flex flex-col transition-colors duration-300 ${
-        isDarkMode ? "bg-slate-950 text-slate-100" : "bg-slate-50 text-slate-900"
+        isDarkMode ? "bg-[#060B17] text-slate-100" : "bg-slate-50 text-slate-900"
       }`}
     >
       <Navbar
@@ -99,6 +107,7 @@ const AppShell = () => {
 
       <Footer isDarkMode={isDarkMode} />
       <BottomNavigation isDarkMode={isDarkMode} />
+      <FloatingCTA isDarkMode={isDarkMode} />
 
       <CarePlanModal
         isOpen={carePlanOpen}

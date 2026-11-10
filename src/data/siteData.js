@@ -1,6 +1,9 @@
 import maleDocImg from "../assets/images/male_doc.png";
 import femaleDocImg from "../assets/images/female_doc.png";
-import heroDocImg from "../assets/images/Untitled-1.jpg";
+import heroDocImg from "../assets/images/hero-doctor.jpg";
+import teleDocImg from "../assets/images/on1.png";
+import saladWellnessImg from "../assets/images/6.png";
+import petCareImg from "../assets/images/pet-care.jpg";
 import robotImg from "../assets/images/robot.png";
 import { ROUTES } from "../router/routes";
 
@@ -67,7 +70,7 @@ export const LEADERSHIP_TEAM = [
     role: "Director of Telehealth & Surgery Care",
     specialty: "MS, General Surgery • 12+ yrs experience",
     bio: "Coordinates surgical second opinions, hospital partnerships, and seamless post-operative follow-up journeys.",
-    image: heroDocImg,
+    image: teleDocImg,
     badge: "Surgical Care",
   },
   {
@@ -316,7 +319,7 @@ export const BLOG_POSTS = [
     date: "Oct 28, 2026",
     author: "Dr. Aarav Deshmukh",
     authorRole: "MD, Internal Medicine",
-    image: maleDocImg,
+    image: teleDocImg,
     featured: false,
     tags: ["Teleconsultation", "Primary Care", "Doctor Visit"],
     excerpt:
@@ -364,7 +367,7 @@ export const BLOG_POSTS = [
     date: "Oct 11, 2026",
     author: "Dr. Rohan Mehta",
     authorRole: "MS, Preventive & Surgical Care",
-    image: heroDocImg,
+    image: saladWellnessImg,
     featured: false,
     tags: ["Nutrition", "Sleep", "Metabolic Health"],
     excerpt:
@@ -388,7 +391,7 @@ export const BLOG_POSTS = [
     date: "Sep 29, 2026",
     author: "Dr. Aarav Deshmukh",
     authorRole: "MD, Internal Medicine",
-    image: maleDocImg,
+    image: heroDocImg,
     featured: false,
     tags: ["Pharmacy", "E-Prescription", "Medication Safety"],
     excerpt:
@@ -412,7 +415,7 @@ export const BLOG_POSTS = [
     date: "Sep 15, 2026",
     author: "Dr. Meera Nair",
     authorRole: "BVSc, Veterinary Consultant",
-    image: femaleDocImg,
+    image: petCareImg,
     featured: false,
     tags: ["Pet Care", "Veterinary", "Wellness"],
     excerpt:
@@ -578,4 +581,3 @@ export const SEARCHABLE_INDEX = [
   { title: "AI Health Assistant", subtitle: "Symptom check, e-prescription & report analyzer", to: `${ROUTES.HOME}#ai-assistant`, type: "Feature" },
   { title: "Docdor Care Plan", subtitle: "Unlimited GP consults & 20% lab savings", to: `${ROUTES.CONTACT}?topic=care-plan`, type: "Plan" },
 ];
-

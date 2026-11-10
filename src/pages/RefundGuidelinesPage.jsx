@@ -1,11 +1,15 @@
 import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import {
+  FiAlertCircle,
   FiArrowRight,
   FiCheckCircle,
   FiClock,
   FiCreditCard,
+  FiHeart,
   FiRefreshCw,
 } from "react-icons/fi";
+import { FaFlask, FaPills, FaStethoscope } from "react-icons/fa";
 import LegalPageLayout from "../components/common/LegalPageLayout";
 import Link from "../router/Link";
 import { ROUTES } from "../router/routes";
@@ -13,6 +17,7 @@ import { ROUTES } from "../router/routes";
 const REFUND_SCENARIOS = {
   consultation: {
     label: "Doctor Consultation (Online / In-Person)",
+    icon: FaStethoscope,
     options: [
       {
         id: "early-cancel",
@@ -42,6 +47,7 @@ const REFUND_SCENARIOS = {
   },
   lab: {
     label: "Diagnostic Lab Test & Home Collection",
+    icon: FaFlask,
     options: [
       {
         id: "before-dispatch",
@@ -71,6 +77,7 @@ const REFUND_SCENARIOS = {
   },
   medicine: {
     label: "Medicine & Pharmacy Delivery",
+    icon: FaPills,
     options: [
       {
         id: "pre-dispatch",
@@ -100,6 +107,7 @@ const REFUND_SCENARIOS = {
   },
   careplan: {
     label: "Docdor Care Plan Membership",
+    icon: FiHeart,
     options: [
       {
         id: "within-7-days",
@@ -223,10 +231,10 @@ const RefundGuidelinesPage = ({ isDarkMode }) => {
       sections={REFUND_SECTIONS}
       topBanner={
         <div
-          className={`rounded-3xl border p-6 sm:p-8 ${
+          className={`print:hidden rounded-[2rem] border p-6 sm:p-8 ${
             isDarkMode
               ? "border-sky-500/30 bg-slate-900/95"
-              : "border-sky-200 bg-white shadow-[0_20px_50px_rgba(56,189,248,0.1)]"
+              : "border-slate-200/80 bg-white shadow-[0_20px_50px_rgba(14,165,233,0.1)]"
           }`}
         >
           <div className="flex flex-wrap items-center justify-between gap-2">
@@ -234,7 +242,7 @@ const RefundGuidelinesPage = ({ isDarkMode }) => {
               <span className="text-xs font-bold uppercase tracking-wider text-sky-500">
                 Interactive Eligibility Checker
               </span>
-              <h2 className="mt-1 text-xl sm:text-2xl font-bold">
+              <h2 className="mt-1 text-xl sm:text-2xl font-extrabold">
                 Check Your Instant Refund Eligibility
               </h2>
             </div>
@@ -243,26 +251,28 @@ const RefundGuidelinesPage = ({ isDarkMode }) => {
           <div className="mt-6 grid gap-6 lg:grid-cols-12 items-center">
             <div className="lg:col-span-7 space-y-4">
               <div>
-                <label className="mb-1.5 block text-xs font-bold uppercase tracking-wider opacity-75">
+                <p className="mb-2 text-xs font-bold uppercase tracking-wider opacity-75">
                   1. Select Service Type
-                </label>
-                <div className="grid gap-2 sm:grid-cols-2">
+                </p>
+                <div className="grid gap-2.5 sm:grid-cols-2">
                   {Object.entries(REFUND_SCENARIOS).map(([key, item]) => {
                     const active = key === serviceKey;
+                    const Icon = item.icon;
                     return (
                       <button
                         key={key}
                         type="button"
                         onClick={() => handleServiceChange(key)}
-                        className={`rounded-xl border px-3.5 py-2.5 text-left text-xs font-semibold transition ${
+                        className={`flex items-center gap-2.5 rounded-2xl border px-3.5 py-3 text-left text-xs font-semibold transition cursor-pointer ${
                           active
-                            ? "border-sky-500 bg-sky-500/15 text-sky-500"
+                            ? "border-sky-500 bg-sky-500/15 text-sky-500 shadow-xs"
                             : isDarkMode
                               ? "border-slate-800 bg-slate-800/70 text-slate-300 hover:border-slate-700"
                               : "border-slate-200 bg-slate-50 text-slate-700 hover:border-sky-300"
                         }`}
                       >
-                        {item.label}
+                        <Icon className="shrink-0 text-sky-500" size={14} />
+                        <span>{item.label}</span>
                       </button>
                     );
                   })}
@@ -280,10 +290,10 @@ const RefundGuidelinesPage = ({ isDarkMode }) => {
                   id="refund-scenario-select"
                   value={scenarioId}
                   onChange={(e) => setScenarioId(e.target.value)}
-                  className={`w-full rounded-2xl border px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 ${
+                  className={`w-full rounded-2xl border px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 transition ${
                     isDarkMode
-                      ? "border-slate-700 bg-slate-800 text-slate-100 focus:ring-sky-500"
-                      : "border-slate-200 bg-slate-50 text-slate-900 focus:ring-sky-400"
+                      ? "border-slate-700 bg-slate-800 text-slate-100 focus:border-sky-500 focus:ring-sky-500/30"
+                      : "border-slate-200 bg-slate-50 text-slate-900 focus:bg-white focus:border-sky-400 focus:ring-sky-400/25"
                   }`}
                 >
                   {currentService.options.map((opt) => (
@@ -295,42 +305,64 @@ const RefundGuidelinesPage = ({ isDarkMode }) => {
               </div>
             </div>
 
-            <div
-              className={`lg:col-span-5 rounded-2xl border p-5 sm:p-6 ${
-                isDarkMode
-                  ? "border-slate-800 bg-slate-800/70"
-                  : "border-sky-100 bg-sky-50/70"
-              }`}
-            >
-              <div className="flex items-center gap-2">
-                <FiCheckCircle
-                  className={activeScenario.eligible ? "text-emerald-500" : "text-amber-500"}
-                  size={18}
-                />
-                <span
-                  className={`text-xs font-bold uppercase tracking-wider ${
-                    activeScenario.eligible ? "text-emerald-500" : "text-amber-500"
+            <div className="lg:col-span-5">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={`${serviceKey}-${activeScenario.id}`}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.18 }}
+                  className={`rounded-2xl border p-5 sm:p-6 ${
+                    activeScenario.eligible
+                      ? isDarkMode
+                        ? "border-emerald-500/30 bg-emerald-500/10"
+                        : "border-emerald-200 bg-emerald-50/70"
+                      : isDarkMode
+                        ? "border-amber-500/30 bg-amber-500/10"
+                        : "border-amber-200 bg-amber-50/70"
                   }`}
                 >
-                  {activeScenario.eligible ? "Eligible for Refund / Credit" : "Policy Restriction"}
-                </span>
-              </div>
+                  <div className="flex items-center gap-2">
+                    {activeScenario.eligible ? (
+                      <FiCheckCircle className="text-emerald-500" size={18} />
+                    ) : (
+                      <FiAlertCircle className="text-amber-500" size={18} />
+                    )}
+                    <span
+                      className={`text-xs font-bold uppercase tracking-wider ${
+                        activeScenario.eligible ? "text-emerald-600 dark:text-emerald-400" : "text-amber-600 dark:text-amber-400"
+                      }`}
+                    >
+                      {activeScenario.eligible ? "Eligible for Refund / Credit" : "Policy Restriction"}
+                    </span>
+                  </div>
 
-              <p className="mt-3 text-xl font-extrabold">{activeScenario.refundPercent}</p>
-              <p className={`mt-1 text-xs font-medium ${isDarkMode ? "text-slate-300" : "text-slate-700"}`}>
-                Timeline: {activeScenario.timeline}
-              </p>
-              <p className={`mt-3 text-xs leading-relaxed ${isDarkMode ? "text-slate-400" : "text-slate-600"}`}>
-                {activeScenario.note}
-              </p>
+                  <p className="mt-3 text-xl font-extrabold">{activeScenario.refundPercent}</p>
+                  <p
+                    className={`mt-1 text-xs font-semibold ${
+                      isDarkMode ? "text-slate-300" : "text-slate-700"
+                    }`}
+                  >
+                    Timeline: {activeScenario.timeline}
+                  </p>
+                  <p
+                    className={`mt-3 text-xs leading-relaxed ${
+                      isDarkMode ? "text-slate-300" : "text-slate-600"
+                    }`}
+                  >
+                    {activeScenario.note}
+                  </p>
 
-              <Link
-                to={`${ROUTES.CONTACT}?topic=refund`}
-                className="mt-5 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-sky-500 to-cyan-500 px-4 py-2.5 text-xs font-semibold text-white shadow-sm transition hover:opacity-95"
-              >
-                <span>Submit Refund Request</span>
-                <FiArrowRight />
-              </Link>
+                  <Link
+                    to={`${ROUTES.CONTACT}?topic=refund`}
+                    className="mt-5 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-sky-500 to-teal-500 px-4 py-2.5 text-xs font-semibold text-white shadow-sm transition hover:brightness-105"
+                  >
+                    <span>Submit Refund Request</span>
+                    <FiArrowRight />
+                  </Link>
+                </motion.div>
+              </AnimatePresence>
             </div>
           </div>
         </div>
@@ -340,4 +372,3 @@ const RefundGuidelinesPage = ({ isDarkMode }) => {
 };
 
 export default RefundGuidelinesPage;
-

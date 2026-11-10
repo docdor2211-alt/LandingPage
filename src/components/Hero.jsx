@@ -1,13 +1,23 @@
-import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { gsap } from "gsap";
 import { FaApple, FaGooglePlay, FaStar } from "react-icons/fa";
-import { FiArrowRight } from "react-icons/fi";
-import img from "../assets/images/Untitled-1.jpg";
+import {
+  FiArrowRight,
+  FiClock,
+  FiShield,
+  FiUsers,
+  FiVideo,
+} from "react-icons/fi";
+import heroDocImg from "../assets/images/hero-doctor.jpg";
+import Link from "../router/Link";
+import { ROUTES } from "../router/routes";
+
+const HERO_METRICS = [
+  { value: "50K+", label: "Patients Served", icon: FiUsers },
+  { value: "500+", label: "NMC Doctors", icon: FiShield },
+  { value: "10 min", label: "Avg. Video Connect", icon: FiClock },
+];
 
 const Hero = ({ isDarkMode, onOpenDownload }) => {
-  const heroRef = useRef(null);
-
   const handleExploreServices = () => {
     const el = document.getElementById("services");
     if (el) {
@@ -15,142 +25,244 @@ const Hero = ({ isDarkMode, onOpenDownload }) => {
     }
   };
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from(".hero-blob", {
-        scale: 0.75,
-        opacity: 0,
-        duration: 1.2,
-        ease: "elastic.out(1, 0.85)",
-        stagger: 0.18,
-      });
-
-      gsap.from(".hero-animate", {
-        y: 40,
-        opacity: 0,
-        duration: 0.9,
-        ease: "power3.out",
-        stagger: 0.12,
-      });
-    }, heroRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <motion.section
-      ref={heroRef}
-      className={`relative overflow-hidden transition-colors duration-300 ${
+    <section
+      className={`relative overflow-hidden border-b transition-colors duration-300 ${
         isDarkMode
-          ? "bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950"
-          : "bg-gradient-to-br from-sky-100 via-slate-50 to-white"
+          ? "border-slate-800/70 bg-gradient-to-br from-[#060B17] via-[#0B1324] to-[#071522]"
+          : "border-slate-200/70 bg-gradient-to-br from-sky-50/90 via-white to-cyan-50/50"
       }`}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
     >
-      {/* Decorative Background */}
-      <div className={`absolute -top-24 -left-24 h-72 w-72 rounded-full blur-3xl hero-blob ${isDarkMode ? "bg-sky-500/20" : "bg-sky-400/30"}`}></div>
-      <div className={`absolute bottom-0 right-0 h-80 w-80 rounded-full blur-3xl hero-blob ${isDarkMode ? "bg-sky-500/18" : "bg-sky-300/30"}`}></div>
+      {/* Background texture & ambient radial glow */}
+      <div className="pointer-events-none absolute inset-0 bg-medical-grid opacity-55" />
+      <div
+        className={`pointer-events-none absolute -top-32 -left-28 h-96 w-96 rounded-full blur-3xl ${
+          isDarkMode ? "bg-sky-500/15" : "bg-sky-300/35"
+        }`}
+      />
+      <div
+        className={`pointer-events-none absolute -bottom-24 right-0 h-96 w-96 rounded-full blur-3xl ${
+          isDarkMode ? "bg-teal-500/12" : "bg-teal-200/35"
+        }`}
+      />
 
-      <div className="relative z-10 mx-auto flex max-w-7xl flex-col items-center gap-10 px-6 py-12 lg:flex-row lg:items-start lg:justify-between lg:py-24">
-        {/* Left Content */}
-        <motion.div
-          className="max-w-xl text-center lg:text-left"
-          initial={{ opacity: 0, x: -24 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.9, ease: "easeOut" }}
-        >
-          <span className={`hero-animate inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold shadow-sm ${isDarkMode ? "border-sky-500/70 bg-slate-800/80 text-slate-200" : "border-sky-200 bg-white/90 text-slate-700"}`}>
-            <FaStar className="text-sky-500" />
-            Trusted by Thousands of Patients
-          </span>
-
-          <h1 className={`hero-animate mt-6 text-3xl font-extrabold leading-tight md:text-4xl lg:text-5xl ${isDarkMode ? "text-slate-100" : "text-gray-900"}`}>
-            Your Complete
-            <span className={`block ${isDarkMode ? "text-slate-200" : "text-slate-900"}`}>Healthcare Ecosystem</span>
-            In One App.
-          </h1>
-
-          <p className={`hero-animate mt-6 text-base leading-8 ${isDarkMode ? "text-slate-300" : "text-gray-600"}`}>
-            Book doctor consultations, order medicines, schedule lab tests,
-            connect with AI health assistants, and manage your health anytime,
-            anywhere.
-          </p>
-
-          <div className="hero-animate mt-8 flex flex-col gap-3 sm:flex-row">
-            <motion.button
-              type="button"
-              onClick={() => onOpenDownload && onOpenDownload("ios")}
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-              className={`flex items-center justify-center gap-2 rounded-3xl border px-5 py-3 text-sm shadow-xl transition ${isDarkMode ? "border-slate-700 bg-slate-900 text-white shadow-slate-950/50" : "border-slate-200 bg-slate-900 text-white shadow-[0_20px_35px_rgba(14,165,233,0.18)]"}`}
-            >
-              <FaApple size={26} />
-              <div className="text-left">
-                <p className="text-xs uppercase tracking-[0.2em] text-slate-300">Download</p>
-                <p className="font-semibold">App Store</p>
-              </div>
-            </motion.button>
-
-            <motion.button
-              type="button"
-              onClick={() => onOpenDownload && onOpenDownload("android")}
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-              className="flex items-center justify-center gap-2 rounded-3xl bg-gradient-to-r from-sky-500 via-cyan-500 to-sky-400 px-5 py-3 text-white shadow-xl shadow-sky-300/40 transition text-sm"
-            >
-              <FaGooglePlay size={22} />
-              <div className="text-left">
-                <p className="text-xs uppercase tracking-[0.2em] text-slate-100">Get it on</p>
-                <p className="font-semibold">Google Play</p>
-              </div>
-            </motion.button>
-          </div>
-
-          <motion.button
-            type="button"
-            onClick={handleExploreServices}
-            whileHover={{ x: 4 }}
-            className={`hero-animate mt-8 inline-flex items-center gap-2 font-semibold ${isDarkMode ? "text-slate-200 hover:text-white" : "text-slate-900 hover:text-slate-700"}`}
+      <div className="relative z-10 mx-auto max-w-7xl px-6 py-12 sm:py-16 lg:py-20">
+        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-10">
+          {/* Left Column: Copy, CTAs & Trust Stats */}
+          <motion.div
+            className="lg:col-span-7 text-center lg:text-left"
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
           >
-            Explore Services
-            <FiArrowRight />
-          </motion.button>
+            <div className="flex justify-center lg:justify-start">
+              <span
+                className={`inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs sm:text-sm font-semibold shadow-xs ${
+                  isDarkMode
+                    ? "border-sky-500/30 bg-sky-500/10 text-sky-300"
+                    : "border-sky-200 bg-white/90 text-sky-800"
+                }`}
+              >
+                <span>NMC-Verified Doctors &bull; 24/7 Care</span>
+              </span>
+            </div>
 
-          <div className="hero-animate mt-8 grid gap-4 sm:grid-cols-3">
-            <div className={`rounded-3xl border p-4 shadow-sm ${isDarkMode ? "border-slate-700 bg-slate-800/80" : "border-sky-200 bg-white/90 shadow-[0_18px_40px_rgba(56,189,248,0.12)]"}`}>
-              <h3 className={`text-xl font-bold ${isDarkMode ? "text-slate-100" : "text-slate-900"}`}>50K+</h3>
-              <p className={`text-sm ${isDarkMode ? "text-slate-400" : "text-slate-500"}`}>Patients</p>
-            </div>
-            <div className={`rounded-3xl p-5 shadow-sm shadow-slate-900/5 ${isDarkMode ? "bg-slate-800/80" : "bg-white/90 shadow-[0_18px_40px_rgba(56,189,248,0.1)]"}`}>
-              <h3 className={`text-2xl font-bold ${isDarkMode ? "text-slate-100" : "text-slate-900"}`}>500+</h3>
-              <p className={`text-sm ${isDarkMode ? "text-slate-400" : "text-slate-500"}`}>Doctors</p>
-            </div>
-            <div className={`rounded-3xl p-5 shadow-sm shadow-slate-900/5 ${isDarkMode ? "bg-slate-800/80" : "bg-white/90 shadow-[0_18px_40px_rgba(56,189,248,0.1)]"}`}>
-              <h3 className={`text-2xl font-bold ${isDarkMode ? "text-slate-100" : "text-slate-900"}`}>24/7</h3>
-              <p className={`text-sm ${isDarkMode ? "text-slate-400" : "text-slate-500"}`}>Support</p>
-            </div>
-          </div>
-        </motion.div>
+            <h1
+              className={`mt-6 text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl lg:text-[3.35rem] ${
+                isDarkMode ? "text-white" : "text-slate-900"
+              }`}
+            >
+              Your Complete{" "}
+              <span className="bg-gradient-to-r from-sky-500 via-cyan-500 to-teal-500 bg-clip-text text-transparent">
+                Healthcare Ecosystem
+              </span>{" "}
+              In One App.
+            </h1>
 
-        {/* Right Image */}
-        <motion.div
-          className="relative flex justify-center lg:self-start md:-mt-8 lg:-mt-0"
-          initial={{ opacity: 0, x: 24 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.9, ease: "easeOut" }}
-        >
-          <motion.img
-            src={img}
-            alt="Professional doctor illustration"
-            className="block h-auto w-64 rounded-[2rem] border border-white/40 shadow-[0_30px_80px_rgba(56,189,248,0.22)] md:w-[24rem]"
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.4 }}
-          />
-        </motion.div>
+            <p
+              className={`mx-auto lg:mx-0 mt-5 max-w-2xl text-base sm:text-lg leading-relaxed ${
+                isDarkMode ? "text-slate-300" : "text-slate-600"
+              }`}
+            >
+              Book instant video or clinic consultations, order verified medicines in 60 minutes,
+              schedule NABL home lab tests, and get physician-reviewed AI health guidance—all in one
+              calm, private place.
+            </p>
+
+            {/* Primary App & Booking Actions */}
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5">
+              <button
+                type="button"
+                onClick={() => onOpenDownload && onOpenDownload("ios")}
+                className={`w-full sm:w-auto flex items-center justify-center gap-3 rounded-2xl border px-5 py-3.5 text-sm shadow-lg transition hover:-translate-y-0.5 ${
+                  isDarkMode
+                    ? "border-slate-700 bg-slate-900 text-white hover:border-slate-500 shadow-black/40"
+                    : "border-slate-900 bg-slate-900 text-white hover:bg-slate-800 shadow-slate-900/15"
+                }`}
+              >
+                <FaApple size={24} />
+                <div className="text-left leading-tight">
+                  <p className="text-[10px] font-medium uppercase tracking-[0.16em] text-slate-300">
+                    Download on
+                  </p>
+                  <p className="font-bold">App Store</p>
+                </div>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => onOpenDownload && onOpenDownload("android")}
+                className="w-full sm:w-auto flex items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-sky-500 via-cyan-500 to-teal-500 px-5 py-3.5 text-sm text-white shadow-lg shadow-sky-500/25 transition hover:-translate-y-0.5 hover:brightness-105"
+              >
+                <FaGooglePlay size={20} />
+                <div className="text-left leading-tight">
+                  <p className="text-[10px] font-medium uppercase tracking-[0.16em] text-sky-50">
+                    Get it on
+                  </p>
+                  <p className="font-bold">Google Play</p>
+                </div>
+              </button>
+
+              <Link
+                to={`${ROUTES.CONTACT}?topic=package`}
+                className={`w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl border px-5 py-3.5 text-sm font-semibold transition ${
+                  isDarkMode
+                    ? "border-slate-700 bg-slate-800/70 text-slate-100 hover:border-sky-500/60 hover:bg-slate-800"
+                    : "border-slate-200 bg-white text-slate-800 hover:border-sky-300 hover:bg-sky-50/50 shadow-xs"
+                }`}
+              >
+                <FiVideo size={16} className="text-sky-500" />
+                <span>Book Consult</span>
+              </Link>
+            </div>
+
+            <div className="mt-6 flex items-center justify-center lg:justify-start">
+              <button
+                type="button"
+                onClick={handleExploreServices}
+                className={`group inline-flex items-center gap-2 text-sm font-semibold transition ${
+                  isDarkMode
+                    ? "text-sky-300 hover:text-sky-200"
+                    : "text-sky-700 hover:text-sky-900"
+                }`}
+              >
+                <span>Explore all 6 care services</span>
+                <FiArrowRight className="transition-transform group-hover:translate-x-1" />
+              </button>
+            </div>
+
+            {/* Trust Metrics */}
+            <div className="mt-9 grid grid-cols-3 gap-3 sm:gap-4 max-w-xl mx-auto lg:mx-0">
+              {HERO_METRICS.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <div
+                    key={item.label}
+                    className={`rounded-2xl border p-3.5 sm:p-4 text-left transition ${
+                      isDarkMode
+                        ? "border-slate-800 bg-slate-900/80"
+                        : "border-slate-200/80 bg-white/90 shadow-xs"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <span
+                        className={`text-xl sm:text-2xl font-extrabold tabular-nums ${
+                          isDarkMode ? "text-white" : "text-slate-900"
+                        }`}
+                      >
+                        {item.value}
+                      </span>
+                      <Icon className="hidden sm:block text-sky-500" size={16} />
+                    </div>
+                    <p
+                      className={`mt-1 text-xs font-medium ${
+                        isDarkMode ? "text-slate-400" : "text-slate-500"
+                      }`}
+                    >
+                      {item.label}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          </motion.div>
+
+          {/* Right Column: Editorial Doctor Showcase */}
+          <motion.div
+            className="lg:col-span-5 relative flex justify-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.1, ease: "easeOut" }}
+          >
+            <div className="relative w-full max-w-sm sm:max-w-md">
+              {/* Soft glow ring */}
+              <div
+                className={`pointer-events-none absolute -inset-4 rounded-[2.5rem] blur-2xl ${
+                  isDarkMode
+                    ? "bg-gradient-to-tr from-sky-500/20 to-teal-500/15"
+                    : "bg-gradient-to-tr from-sky-300/35 to-cyan-200/35"
+                }`}
+              />
+
+              {/* Main Showcase Card */}
+              <div
+                className={`relative overflow-hidden rounded-[2rem] border p-3 shadow-2xl ${
+                  isDarkMode
+                    ? "border-slate-700/80 bg-slate-900/90 shadow-black/50"
+                    : "border-white/90 bg-white/95 shadow-[0_24px_70px_-15px_rgba(14,165,233,0.28)]"
+                }`}
+              >
+                <div className="relative overflow-hidden rounded-[1.5rem] bg-sky-100 dark:bg-slate-800">
+                  <img
+                    src={heroDocImg}
+                    alt="Docdor verified medical specialist"
+                    className="h-[340px] sm:h-[410px] w-full object-cover object-top"
+                  />
+
+                  {/* Subtle bottom vignette */}
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-slate-950/75 via-slate-950/20 to-transparent" />
+
+                  {/* Top-left Live Availability Badge */}
+                  <div
+                    className={`absolute left-3.5 top-3.5 inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-semibold backdrop-blur-md shadow-sm ${
+                      isDarkMode
+                        ? "border-slate-700/80 bg-slate-900/85 text-slate-100"
+                        : "border-white/80 bg-white/90 text-slate-800"
+                    }`}
+                  >
+                    <FiVideo size={13} className="text-sky-500" />
+                    <span>Next Video Slot: 8 mins</span>
+                  </div>
+
+                  {/* Bottom Embedded Info Strip */}
+                  <div className="absolute inset-x-3.5 bottom-3.5 flex items-center justify-between gap-2 rounded-2xl border border-white/20 bg-slate-950/70 px-4 py-3 text-white backdrop-blur-md">
+                    <div>
+                      <p className="text-xs font-medium text-sky-300">
+                        Verified Patient Rating
+                      </p>
+                      <div className="mt-0.5 flex items-center gap-1.5">
+                        <div className="flex items-center gap-0.5 text-amber-400">
+                          <FaStar size={12} />
+                          <FaStar size={12} />
+                          <FaStar size={12} />
+                          <FaStar size={12} />
+                          <FaStar size={12} />
+                        </div>
+                        <span className="text-sm font-bold tabular-nums">4.9</span>
+                        <span className="text-xs text-slate-300">(12.4K+)</span>
+                      </div>
+                    </div>
+                    <span className="rounded-xl bg-emerald-500/20 border border-emerald-400/30 px-2.5 py-1 text-[11px] font-bold text-emerald-300">
+                      NMC Certified
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </div>
-    </motion.section>
+    </section>
   );
 };
 

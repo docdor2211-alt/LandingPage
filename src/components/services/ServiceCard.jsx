@@ -1,66 +1,99 @@
 import { motion } from "framer-motion";
-import { FiArrowUpRight } from "react-icons/fi";
+import { FiArrowRight, FiCheckCircle } from "react-icons/fi";
+import Link from "../../router/Link";
+import { ROUTES } from "../../router/routes";
 
 const ServiceCard = ({
   isDarkMode,
   title,
+  category,
   description,
   image,
-  color,
+  badge,
+  perk,
   free,
-  fullBackground,
 }) => {
-  const bgStyle = fullBackground && image ? { backgroundImage: `url(${image})`, backgroundSize: "cover", backgroundPosition: "center" } : {};
-
   return (
-    <motion.div
-      whileHover={{ y: -6 }}
-      transition={{ duration: 0.28, ease: "easeOut" }}
-      style={bgStyle}
-      className={`group relative overflow-hidden rounded-2xl border transition-all duration-300 ${isDarkMode ? "border-slate-700 bg-slate-900/95 hover:border-slate-600" : "border-slate-200 bg-white/95 hover:border-slate-300"} ${fullBackground ? "p-0 shadow-lg bg-cover bg-center" : "p-4 shadow-lg"}`}
+    <motion.article
+      whileHover={{ y: -5 }}
+      transition={{ duration: 0.25, ease: "easeOut" }}
+      className={`group flex flex-col overflow-hidden rounded-3xl border transition-all duration-300 ${
+        isDarkMode
+          ? "border-slate-800 bg-slate-900/90 hover:border-sky-500/40 shadow-lg shadow-black/30"
+          : "border-slate-200/90 bg-white hover:border-sky-300 shadow-[0_12px_36px_-15px_rgba(14,165,233,0.16)]"
+      }`}
     >
-      {free && (
-        <span className={fullBackground ? "absolute left-1/2 -translate-x-1/2 bottom-2 rounded-full bg-pink-500 px-4 py-1.5 text-sm font-semibold text-white shadow-md z-20" : "absolute right-4 top-4 rounded-full bg-pink-500 px-3 py-1 text-xs font-semibold text-white shadow-sm z-20"}>
-          FREE
+      {/* Visual Header */}
+      <div className="relative h-52 overflow-hidden bg-sky-50 dark:bg-slate-800">
+        <img
+          src={image}
+          alt={title}
+          className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+        />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/35 via-transparent to-transparent" />
+
+        {/* Category Pill */}
+        <span className="absolute left-4 top-4 rounded-full bg-slate-950/70 px-3 py-1 text-[11px] font-semibold text-white backdrop-blur-md">
+          {category}
         </span>
-      )}
 
-      {fullBackground && image ? (
-        <>
-          <div className="absolute left-0 right-0 top-4 z-30 flex justify-center">
-            <div className={`rounded-full px-4 py-1 ${isDarkMode ? 'bg-black/55 text-slate-100' : 'bg-white/90 text-slate-900'} shadow-sm`}>{title}</div>
-          </div>
-          <div className="relative z-10 flex h-78 w-full items-end justify-center">
-            {/* <div className={`w-full rounded-b-2xl p-4 ${isDarkMode ? "bg-black/28" : "bg-white/65"}`}>
-              <p className={`mt-2 text-xs text-center ${isDarkMode ? "text-slate-300" : "text-slate-600"}`}>{description}</p>
-            </div> */}
-          </div>
-        </>
-      ) : (
-        <>
-          {image && (
-            <div className={`mx-auto mb-4 flex h-40 w-40 items-center justify-center rounded-[1rem] bg-gradient-to-br ${color} p-4 shadow-inner`}>
-              <img src={image} alt={title} className="h-full w-full object-contain" />
-            </div>
-          )}
+        {/* Badge / Free Tag */}
+        {badge && (
+          <span
+            className={`absolute right-4 top-4 rounded-full px-3 py-1 text-[11px] font-bold shadow-sm ${
+              free
+                ? "bg-gradient-to-r from-emerald-500 to-teal-500 text-white"
+                : "bg-gradient-to-r from-sky-500 to-cyan-500 text-white"
+            }`}
+          >
+            {badge}
+          </span>
+        )}
+      </div>
 
-          <h3 className={`text-xl font-bold ${isDarkMode ? "text-slate-100" : "text-slate-900"}`}>
+      {/* Content Body */}
+      <div className="flex flex-1 flex-col justify-between p-6">
+        <div>
+          <h3
+            className={`text-xl font-bold tracking-tight transition-colors group-hover:text-sky-500 ${
+              isDarkMode ? "text-white" : "text-slate-900"
+            }`}
+          >
             {title}
           </h3>
-
-          {/* <p className={`mt-3 text-sm leading-7 ${isDarkMode ? "text-slate-400" : "text-slate-600"}`}>
+          <p
+            className={`mt-2.5 text-sm leading-relaxed ${
+              isDarkMode ? "text-slate-400" : "text-slate-600"
+            }`}
+          >
             {description}
-          </p> */}
-{/* 
-          <div className="mt-6 flex justify-center">
-            <button className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition ${isDarkMode ? "border-slate-700 text-slate-100 hover:border-slate-500" : "border-slate-200 text-slate-900 hover:border-slate-300"}`}>
-              Learn More
-              <FiArrowUpRight className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-            </button>
-          </div> */}
-        </>
-      )}
-    </motion.div>
+          </p>
+        </div>
+
+        <div
+          className={`mt-5 flex items-center justify-between border-t pt-4 ${
+            isDarkMode ? "border-slate-800" : "border-slate-100"
+          }`}
+        >
+          <span
+            className={`inline-flex items-center gap-1.5 text-xs font-semibold ${
+              isDarkMode ? "text-slate-300" : "text-slate-700"
+            }`}
+          >
+            <FiCheckCircle className="text-emerald-500 shrink-0" size={14} />
+            <span>{perk}</span>
+          </span>
+
+          <Link
+            to={`${ROUTES.CONTACT}?topic=package&package=${encodeURIComponent(title)}`}
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-sky-500 hover:text-sky-400 transition-colors"
+          >
+            <span>Book</span>
+            <FiArrowRight className="transition-transform group-hover:translate-x-1" />
+          </Link>
+        </div>
+      </div>
+    </motion.article>
   );
 };
 

@@ -16,20 +16,22 @@ const PageHero = ({
 }) => {
   return (
     <section
-      className={`relative overflow-hidden transition-colors duration-300 ${
+      className={`relative overflow-hidden border-b transition-colors duration-300 ${
         isDarkMode
-          ? "bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950"
-          : "bg-gradient-to-br from-sky-100 via-slate-50 to-white"
+          ? "border-slate-800/80 bg-gradient-to-br from-[#060B17] via-slate-900 to-[#081326]"
+          : "border-slate-200/70 bg-gradient-to-br from-sky-50/90 via-white to-cyan-50/60"
       }`}
     >
+      {/* Subtle architectural grid & ambient glow */}
+      <div className="pointer-events-none absolute inset-0 bg-medical-grid opacity-50" />
       <div
-        className={`pointer-events-none absolute -top-24 -left-24 h-72 w-72 rounded-full blur-3xl ${
-          isDarkMode ? "bg-sky-500/20" : "bg-sky-400/30"
+        className={`pointer-events-none absolute -top-28 -left-24 h-80 w-80 rounded-full blur-3xl ${
+          isDarkMode ? "bg-sky-500/15" : "bg-sky-300/30"
         }`}
       />
       <div
-        className={`pointer-events-none absolute -bottom-24 right-0 h-80 w-80 rounded-full blur-3xl ${
-          isDarkMode ? "bg-cyan-500/15" : "bg-sky-300/30"
+        className={`pointer-events-none absolute -bottom-28 right-0 h-80 w-80 rounded-full blur-3xl ${
+          isDarkMode ? "bg-teal-500/12" : "bg-cyan-200/35"
         }`}
       />
 
@@ -43,8 +45,10 @@ const PageHero = ({
         >
           <Link
             to={ROUTES.HOME}
-            className={`inline-flex items-center gap-1.5 transition-colors ${
-              isDarkMode ? "hover:text-sky-300" : "hover:text-sky-600"
+            className={`inline-flex items-center gap-1.5 rounded-lg px-2 py-1 -ml-2 transition-colors ${
+              isDarkMode
+                ? "hover:bg-slate-800/70 hover:text-sky-300"
+                : "hover:bg-sky-50 hover:text-sky-700"
             }`}
           >
             <FiHome size={14} />
@@ -52,12 +56,16 @@ const PageHero = ({
           </Link>
           {breadcrumbGroup && (
             <>
-              <FiChevronRight size={14} className="opacity-60" />
+              <FiChevronRight size={14} className="opacity-50" />
               <span>{breadcrumbGroup}</span>
             </>
           )}
-          <FiChevronRight size={14} className="opacity-60" />
-          <span className={isDarkMode ? "text-sky-300 font-semibold" : "text-sky-700 font-semibold"}>
+          <FiChevronRight size={14} className="opacity-50" />
+          <span
+            className={`font-semibold ${
+              isDarkMode ? "text-sky-300" : "text-sky-700"
+            }`}
+          >
             {currentPage}
           </span>
         </nav>
@@ -68,17 +76,17 @@ const PageHero = ({
           }`}
         >
           <motion.div
-            initial={{ opacity: 0, y: 18 }}
+            initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, ease: "easeOut" }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
             className={rightContent ? "lg:col-span-7" : "max-w-3xl"}
           >
             {badge && (
               <span
-                className={`inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs sm:text-sm font-semibold tracking-wide uppercase shadow-sm ${
+                className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-[11px] sm:text-xs font-bold tracking-[0.14em] uppercase ${
                   isDarkMode
-                    ? "border-sky-500/40 bg-blue-900/60 text-sky-200"
-                    : "border-sky-200 bg-blue-100/90 text-blue-900"
+                    ? "border-sky-500/30 bg-sky-500/10 text-sky-300"
+                    : "border-sky-200 bg-sky-50 text-sky-700"
                 }`}
               >
                 {badge}
@@ -86,13 +94,13 @@ const PageHero = ({
             )}
 
             <h1
-              className={`mt-5 text-3xl font-extrabold leading-tight sm:text-4xl lg:text-5xl ${
-                isDarkMode ? "text-slate-100" : "text-slate-900"
+              className={`mt-5 text-3xl font-extrabold leading-[1.15] sm:text-4xl lg:text-5xl ${
+                isDarkMode ? "text-white" : "text-slate-900"
               }`}
             >
               {title}{" "}
               {highlight && (
-                <span className="bg-gradient-to-r from-sky-500 via-cyan-500 to-blue-600 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-sky-500 via-cyan-500 to-teal-500 bg-clip-text text-transparent">
                   {highlight}
                 </span>
               )}
@@ -113,9 +121,9 @@ const PageHero = ({
 
           {rightContent && (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
+              transition={{ duration: 0.45, delay: 0.08, ease: "easeOut" }}
               className="lg:col-span-5"
             >
               {rightContent}
@@ -128,4 +136,3 @@ const PageHero = ({
 };
 
 export default PageHero;
-

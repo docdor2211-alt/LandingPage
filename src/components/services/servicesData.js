@@ -1,63 +1,88 @@
-import  image from "../../assets/images/1.png"
-import image1 from "../../assets/images/3.png"
-import image2 from "../../assets/images/4.png"
-import image3 from "../../assets/images/5.png"
-import image4 from "../../assets/images/2.png"
-import petImage from "../../assets/images/dog_de.png";
+import inPersonImg from "../../assets/images/1.png";
+import labTestImg from "../../assets/images/2.png";
+import onlineConsultImg from "../../assets/images/3.png";
+import surgeryImg from "../../assets/images/4.png";
+import medicineImg from "../../assets/images/5.png";
+import petCareImg from "../../assets/images/pet-care.jpg";
+
+export const SERVICE_CATEGORIES = [
+  "All Services",
+  "Consultations",
+  "Diagnostics & Pharmacy",
+  "Specialty Care",
+];
 
 export const services = [
   {
     id: 1,
     title: "In-Person Consultation",
-    // description: "Book appointments with experienced doctors near you.",
-    image: image  ,
-    color: "from-slate-100 to-slate-50",
+    category: "Consultations",
+    description:
+      "Book priority clinic visits with verified physicians and specialists near you—skip waiting room queues.",
+    image: inPersonImg,
+    badge: "FREE First Visit",
+    perk: "Same-day clinic slots",
+    accent: "from-amber-500/15 to-lime-500/10",
     free: true,
-    fullBackground: true,
   },
   {
     id: 2,
     title: "Online Consultation",
-    // description: "Consult certified doctors through secure video calls.",
-    image: image1,
-    color: "from-cyan-100 to-sky-50",
+    category: "Consultations",
+    description:
+      "Connect face-to-face over HD video within 10 minutes and receive signed digital e-prescriptions.",
+    image: onlineConsultImg,
+    badge: "24/7 Video",
+    perk: "10-min avg. wait",
+    accent: "from-emerald-500/15 to-teal-500/10",
     free: false,
-    fullBackground: true,
   },
   {
     id: 3,
-    title: "Surgery",
-    // description: "Get access to trusted surgeons and hospitals.",
-    image: image2,
-    color: "from-pink-100 to-rose-50",
+    title: "Surgery & Second Opinion",
+    category: "Specialty Care",
+    description:
+      "Transparent surgical planning, hospital coordination, and dedicated care coordinators from pre-op to recovery.",
+    image: surgeryImg,
+    badge: "FREE Care Desk",
+    perk: "Top partner hospitals",
+    accent: "from-rose-500/15 to-pink-500/10",
     free: true,
-    fullBackground: true,
   },
   {
     id: 4,
     title: "Order Medicines",
-    // description: "Fast medicine delivery to your doorstep.",
-    image: image3,
-    color: "from-sky-100 to-cyan-50",
+    category: "Diagnostics & Pharmacy",
+    description:
+      "Authentic pharmacist-verified prescriptions and cold-chain essentials delivered straight to your doorstep.",
+    image: medicineImg,
+    badge: "60-Min Express",
+    perk: "Zero delivery on ₹199+",
+    accent: "from-sky-500/15 to-cyan-500/10",
     free: true,
-    fullBackground: true,
   },
   {
     id: 5,
-    title: "Lab Test",
-    // description: "Book lab tests with home sample collection.",
-    image: image4,
-    color: "from-slate-100 to-slate-50",
+    title: "Lab Tests at Home",
+    category: "Diagnostics & Pharmacy",
+    description:
+      "Morning sterile home sample collection by trained phlebotomists with NABL-certified digital PDFs in 12 hours.",
+    image: labTestImg,
+    badge: "Up to 50% OFF",
+    perk: "NABL accredited labs",
+    accent: "from-cyan-500/15 to-blue-500/10",
     free: true,
-    fullBackground: true,
   },
   {
     id: 6,
-    title: "Pet Care",
-    // description: "Veterinary consultations and pet healthcare.",
-    image: image3,
-    color: "from-blue-100 to-sky-50",
+    title: "Veterinary & Pet Care",
+    category: "Specialty Care",
+    description:
+      "Stress-free online veterinary consultations, preventive vaccination schedules, and nutrition care for dogs & cats.",
+    image: petCareImg,
+    badge: "FREE Triage",
+    perk: "Licensed vet doctors",
+    accent: "from-sky-500/15 to-indigo-500/10",
     free: true,
-    fullBackground: true,
   },
 ];

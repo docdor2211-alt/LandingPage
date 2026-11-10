@@ -74,7 +74,7 @@ const DATA_PROTECTION_SECTIONS = [
     id: "cookies-preferences",
     title: "Cookies & Local Storage",
     paragraphs: [
-      "Docdor uses lightweight local storage and essential cookies to remember your dark/light theme preference, selected city, bookmarked wellness articles, and active login state. You can adjust optional analytics preferences below.",
+      "Docdor uses lightweight local storage and essential cookies to remember your dark/light theme preference, selected city, bookmarked wellness articles, and active login state. You can adjust optional analytics preferences above.",
     ],
   },
   {
@@ -86,9 +86,60 @@ const DATA_PROTECTION_SECTIONS = [
   },
 ];
 
+const readSavedPrefs = () => {
+  if (typeof window === "undefined") {
+    return { analyticsEnabled: true, personalizationEnabled: true };
+  }
+  try {
+    const raw =
+      window.localStorage.getItem("docdor-data-prefs") ||
+      window.localStorage.getItem("docdor-privacy-prefs");
+    if (!raw) return { analyticsEnabled: true, personalizationEnabled: true };
+    const parsed = JSON.parse(raw);
+    return {
+      analyticsEnabled:
+        typeof parsed.analyticsEnabled === "boolean" ? parsed.analyticsEnabled : true,
+      personalizationEnabled:
+        typeof parsed.personalizationEnabled === "boolean" ? parsed.personalizationEnabled : true,
+    };
+  } catch {
+    return { analyticsEnabled: true, personalizationEnabled: true };
+  }
+};
+
+const ToggleSwitch = ({ checked, onChange, label, isDarkMode }) => (
+  <button
+    type="button"
+    role="switch"
+    aria-checked={checked}
+    onClick={() => onChange(!checked)}
+    className={`inline-flex items-center gap-2.5 rounded-2xl border px-3.5 py-2 text-xs sm:text-sm font-semibold transition cursor-pointer ${
+      isDarkMode
+        ? "border-slate-700 bg-slate-800/80 text-slate-200 hover:border-slate-600"
+        : "border-slate-200 bg-slate-50 text-slate-700 hover:border-sky-300"
+    }`}
+  >
+    <span
+      className={`relative inline-flex h-5 w-9 shrink-0 items-center rounded-full transition-colors ${
+        checked ? "bg-gradient-to-r from-sky-500 to-teal-500" : isDarkMode ? "bg-slate-600" : "bg-slate-300"
+      }`}
+    >
+      <span
+        className={`inline-block h-3.5 w-3.5 rounded-full bg-white shadow-xs transition-transform ${
+          checked ? "translate-x-4.5" : "translate-x-1"
+        }`}
+      />
+    </span>
+    <span>{label}</span>
+  </button>
+);
+
 const ConfidentialityPage = ({ isDarkMode }) => {
-  const [analyticsEnabled, setAnalyticsEnabled] = useState(true);
-  const [personalizationEnabled, setPersonalizationEnabled] = useState(true);
+  const initialPrefs = readSavedPrefs();
+  const [analyticsEnabled, setAnalyticsEnabled] = useState(initialPrefs.analyticsEnabled);
+  const [personalizationEnabled, setPersonalizationEnabled] = useState(
+    initialPrefs.personalizationEnabled
+  );
   const [prefsSaved, setPrefsSaved] = useState(false);
 
   const handleSavePreferences = () => {
@@ -116,26 +167,29 @@ const ConfidentialityPage = ({ isDarkMode }) => {
         {
           icon: <FiLock size={20} />,
           title: "Encrypted Health Vault",
-          description: "TLS 1.3 in transit and AES-256 encryption at rest protect every report and prescription.",
+          description:
+            "TLS 1.3 in transit and AES-256 encryption at rest protect every report and prescription.",
         },
         {
           icon: <FiShield size={20} />,
           title: "Never Sold to Advertisers",
-          description: "Docdor never sells, rents, or trades patient medical records with ad networks or data brokers.",
+          description:
+            "Docdor never sells, rents, or trades patient medical records with ad networks or data brokers.",
         },
         {
           icon: <FiDatabase size={20} />,
           title: "Download & Delete Control",
-          description: "Export your medical records or request account erasure anytime via our privacy desk.",
+          description:
+            "Export your medical records or request account erasure anytime via our privacy desk.",
         },
       ]}
       sections={DATA_PROTECTION_SECTIONS}
       topBanner={
         <div
-          className={`rounded-3xl border p-6 sm:p-7 ${
+          className={`print:hidden rounded-3xl border p-6 sm:p-7 ${
             isDarkMode
-              ? "border-slate-800 bg-slate-900/90"
-              : "border-sky-200 bg-white shadow-sm"
+              ? "border-slate-800 bg-slate-900/95"
+              : "border-slate-200/80 bg-white shadow-sm"
           }`}
         >
           <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
@@ -143,37 +197,31 @@ const ConfidentialityPage = ({ isDarkMode }) => {
               <span className="text-xs font-bold uppercase tracking-wider text-sky-500">
                 Interactive Privacy Controls
               </span>
-              <h2 className="mt-1 text-lg font-bold">Manage Cookie & Telemetry Preferences</h2>
+              <h2 className="mt-1 text-lg font-extrabold">Manage Cookie &amp; Telemetry Preferences</h2>
               <p className={`mt-1 text-xs sm:text-sm ${isDarkMode ? "text-slate-400" : "text-slate-600"}`}>
-                Essential session & theme storage remain active for core app stability.
+                Essential session &amp; theme storage remain active for core app stability.
               </p>
             </div>
 
-            <div className="flex flex-wrap items-center gap-4">
-              <label className="flex items-center gap-2 text-xs sm:text-sm font-medium cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={analyticsEnabled}
-                  onChange={(e) => setAnalyticsEnabled(e.target.checked)}
-                  className="h-4 w-4 rounded text-sky-500 focus:ring-sky-500"
-                />
-                <span>Performance Analytics</span>
-              </label>
+            <div className="flex flex-wrap items-center gap-3">
+              <ToggleSwitch
+                checked={analyticsEnabled}
+                onChange={setAnalyticsEnabled}
+                label="Performance Analytics"
+                isDarkMode={isDarkMode}
+              />
 
-              <label className="flex items-center gap-2 text-xs sm:text-sm font-medium cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={personalizationEnabled}
-                  onChange={(e) => setPersonalizationEnabled(e.target.checked)}
-                  className="h-4 w-4 rounded text-sky-500 focus:ring-sky-500"
-                />
-                <span>Health Content Suggestions</span>
-              </label>
+              <ToggleSwitch
+                checked={personalizationEnabled}
+                onChange={setPersonalizationEnabled}
+                label="Health Content Suggestions"
+                isDarkMode={isDarkMode}
+              />
 
               <button
                 type="button"
                 onClick={handleSavePreferences}
-                className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-sky-500 to-cyan-500 px-4 py-2 text-xs font-semibold text-white shadow-sm"
+                className="inline-flex items-center gap-1.5 rounded-2xl bg-gradient-to-r from-sky-500 to-teal-500 px-5 py-2.5 text-xs font-bold text-white shadow-sm transition hover:brightness-105 cursor-pointer"
               >
                 {prefsSaved ? <FiCheck /> : null}
                 <span>{prefsSaved ? "Preferences Saved" : "Save Preferences"}</span>
@@ -187,4 +235,3 @@ const ConfidentialityPage = ({ isDarkMode }) => {
 };
 
 export default ConfidentialityPage;
-

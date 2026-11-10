@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { RouterContext } from "./routerContext";
-import { normalizePathname, ROUTE_META, ROUTES } from "./routes";
+import { matchBlogSlug, normalizePathname, ROUTE_META, ROUTES } from "./routes";
 
 const readLocation = () => {
   if (typeof window === "undefined") {
@@ -45,7 +45,11 @@ const RouterProvider = ({ children }) => {
 
   useEffect(() => {
     const meta = ROUTE_META[location.pathname];
-    document.title = meta ? meta.title : "Page Not Found | Docdor";
+    if (meta) {
+      document.title = meta.title;
+    } else if (!matchBlogSlug(location.pathname)) {
+      document.title = "Page Not Found | Docdor";
+    }
   }, [location.pathname]);
 
   const navigate = useCallback((to, options = {}) => {
@@ -79,7 +83,13 @@ const RouterProvider = ({ children }) => {
   }, [location.hash, location.pathname, location.search]);
 
   const isActive = useCallback(
-    (path) => normalizePathname(path) === location.pathname,
+    (path) => {
+      const target = normalizePathname(path);
+      if (target === ROUTES.BLOG && matchBlogSlug(location.pathname)) {
+        return true;
+      }
+      return target === location.pathname;
+    },
     [location.pathname]
   );
 
@@ -102,4 +112,3 @@ const RouterProvider = ({ children }) => {
 };
 
 export default RouterProvider;
-
