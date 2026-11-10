@@ -9,6 +9,7 @@ import {
   FiSearch,
   FiX,
 } from "react-icons/fi";
+import CardImage from "../components/common/CardImage";
 import PageHero from "../components/common/PageHero";
 import Link from "../router/Link";
 import { useRouter } from "../router/routerContext";
@@ -136,7 +137,7 @@ const Blog = ({ isDarkMode }) => {
         >
           <div className="grid lg:grid-cols-12">
             <div
-              className={`relative min-h-[260px] overflow-hidden lg:col-span-5 ${
+              className={`relative aspect-[4/3] overflow-hidden lg:aspect-auto lg:min-h-[340px] lg:col-span-5 ${
                 isDarkMode ? "bg-slate-800" : "bg-sky-50"
               }`}
             >
@@ -146,10 +147,13 @@ const Blog = ({ isDarkMode }) => {
                 aria-hidden="true"
                 className="group block h-full w-full"
               >
-                <img
+                <CardImage
                   src={featuredPost.image}
                   alt={featuredPost.title}
-                  className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                  objectPosition={featuredPost.imagePosition || "center"}
+                  loading="eager"
+                  isDarkMode={isDarkMode}
+                  className="transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/35 via-transparent to-transparent" />
               </Link>
@@ -347,7 +351,7 @@ const Blog = ({ isDarkMode }) => {
                   }`}
                 >
                   <div
-                    className={`relative h-48 overflow-hidden ${
+                    className={`relative aspect-[4/3] w-full overflow-hidden ${
                       isDarkMode ? "bg-slate-800" : "bg-sky-50"
                     }`}
                   >
@@ -357,10 +361,12 @@ const Blog = ({ isDarkMode }) => {
                       aria-hidden="true"
                       className="block h-full w-full"
                     >
-                      <img
+                      <CardImage
                         src={post.image}
                         alt={post.title}
-                        className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                        objectPosition={post.imagePosition || "center"}
+                        isDarkMode={isDarkMode}
+                        className="transition-transform duration-500 group-hover:scale-105"
                       />
                       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/35 via-transparent to-transparent" />
                     </Link>

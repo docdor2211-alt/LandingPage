@@ -14,6 +14,7 @@ import {
   FiShield,
   FiUserCheck,
 } from "react-icons/fi";
+import CardImage from "../components/common/CardImage";
 import Link from "../router/Link";
 import { getBlogPostRoute, ROUTES } from "../router/routes";
 import { BLOG_POSTS } from "../data/siteData";
@@ -361,16 +362,18 @@ const BlogDetail = ({ isDarkMode, slug }) => {
           <article className="lg:col-span-8 space-y-8">
             {/* Featured Image */}
             <div
-              className={`overflow-hidden rounded-[2rem] border shadow-lg ${
+              className={`aspect-[4/3] sm:aspect-[16/11] w-full overflow-hidden rounded-[2rem] border shadow-lg ${
                 isDarkMode
                   ? "border-slate-800 bg-slate-900"
                   : "border-slate-200/80 bg-sky-50 shadow-[0_20px_50px_rgba(14,165,233,0.1)]"
               }`}
             >
-              <img
+              <CardImage
                 src={post.image}
                 alt={post.title}
-                className="h-64 sm:h-80 lg:h-[420px] w-full object-cover object-top"
+                objectPosition={post.imagePosition || "center"}
+                loading="eager"
+                isDarkMode={isDarkMode}
               />
             </div>
 
@@ -575,11 +578,15 @@ const BlogDetail = ({ isDarkMode, slug }) => {
                         : "border-slate-200/70 bg-slate-50/70 hover:border-sky-300 hover:bg-white"
                     }`}
                   >
-                    <img
-                      src={rel.image}
-                      alt={rel.title}
-                      className="h-16 w-16 shrink-0 rounded-xl object-cover object-top"
-                    />
+                    <div className="h-16 w-16 shrink-0 overflow-hidden rounded-xl bg-sky-50 dark:bg-slate-800">
+                      <CardImage
+                        src={rel.image}
+                        alt={rel.title}
+                        objectPosition={rel.imagePosition || "center"}
+                        compact
+                        isDarkMode={isDarkMode}
+                      />
+                    </div>
                     <div className="min-w-0">
                       <span className="text-[10px] font-bold uppercase tracking-wider text-sky-500">
                         {rel.category}

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { FiArrowRight, FiCheckCircle } from "react-icons/fi";
+import CardImage from "../common/CardImage";
 import Link from "../../router/Link";
 import { ROUTES } from "../../router/routes";
 
@@ -8,6 +9,7 @@ const ServiceCard = ({
   title,
   description,
   image,
+  imagePosition = "center",
   badge,
   perk,
   free,
@@ -23,13 +25,15 @@ const ServiceCard = ({
       }`}
     >
       {/* Visual Header */}
-      <div className="relative h-52 overflow-hidden bg-sky-50 dark:bg-slate-800">
-        <img
+      <div className="relative aspect-[4/3] w-full overflow-hidden bg-sky-50 dark:bg-slate-800">
+        <CardImage
           src={image}
           alt={title}
-          className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+          objectPosition={imagePosition}
+          isDarkMode={isDarkMode}
+          className="transition-transform duration-500 group-hover:scale-105"
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/35 via-transparent to-transparent" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/30 via-transparent to-transparent" />
 
         {/* Badge / Free Tag */}
         {badge && (

@@ -20,6 +20,7 @@ export const services = [
     description:
       "Book priority clinic visits with verified physicians and specialists near you—skip waiting room queues.",
     image: inPersonImg,
+    imagePosition: "50% 72%",
     badge: "FREE First Visit",
     perk: "Same-day clinic slots",
     accent: "from-amber-500/15 to-lime-500/10",
@@ -32,6 +33,7 @@ export const services = [
     description:
       "Connect face-to-face over HD video within 10 minutes and receive signed digital e-prescriptions.",
     image: onlineConsultImg,
+    imagePosition: "50% 96%",
     badge: "24/7 Video",
     perk: "10-min avg. wait",
     accent: "from-emerald-500/15 to-teal-500/10",
@@ -44,6 +46,7 @@ export const services = [
     description:
       "Transparent surgical planning, hospital coordination, and dedicated care coordinators from pre-op to recovery.",
     image: surgeryImg,
+    imagePosition: "50% 72%",
     badge: "FREE Care Desk",
     perk: "Top partner hospitals",
     accent: "from-rose-500/15 to-pink-500/10",
@@ -56,6 +59,7 @@ export const services = [
     description:
       "Authentic pharmacist-verified prescriptions and cold-chain essentials delivered straight to your doorstep.",
     image: medicineImg,
+    imagePosition: "50% 72%",
     badge: "60-Min Express",
     perk: "Zero delivery on ₹199+",
     accent: "from-sky-500/15 to-cyan-500/10",
@@ -68,6 +72,7 @@ export const services = [
     description:
       "Morning sterile home sample collection by trained phlebotomists with NABL-certified digital PDFs in 12 hours.",
     image: labTestImg,
+    imagePosition: "50% 72%",
     badge: "Up to 50% OFF",
     perk: "NABL accredited labs",
     accent: "from-cyan-500/15 to-blue-500/10",
@@ -80,6 +85,7 @@ export const services = [
     description:
       "Stress-free online veterinary consultations, preventive vaccination schedules, and nutrition care for dogs & cats.",
     image: petCareImg,
+    imagePosition: "50% 25%",
     badge: "FREE Triage",
     perk: "Licensed vet doctors",
     accent: "from-sky-500/15 to-indigo-500/10",

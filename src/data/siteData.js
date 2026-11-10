@@ -1,10 +1,11 @@
 import maleDocImg from "../assets/images/male_doc.png";
 import femaleDocImg from "../assets/images/female_doc.png";
-import heroDocImg from "../assets/images/hero-doctor.jpg";
 import teleDocImg from "../assets/images/on1.png";
-import saladWellnessImg from "../assets/images/6.png";
+import labReportImg from "../assets/images/Labtest.png";
+import medicationImg from "../assets/images/on3.png";
+import aiCompanionImg from "../assets/images/6.png";
+import saladWellnessImg from "../assets/images/7.png";
 import petCareImg from "../assets/images/pet-care.jpg";
-import robotImg from "../assets/images/robot.png";
 import { ROUTES } from "../router/routes";
 
 export const CITIES = [
@@ -53,6 +54,7 @@ export const LEADERSHIP_TEAM = [
     specialty: "MD, Internal Medicine • 14+ yrs experience",
     bio: "Oversees clinical quality standards, doctor credentialing, and evidence-based teleconsultation protocols across Docdor.",
     image: maleDocImg,
+    imagePosition: "50% 15%",
     badge: "Clinical Governance",
   },
   {
@@ -62,6 +64,7 @@ export const LEADERSHIP_TEAM = [
     specialty: "MD, Pathology • 11+ yrs experience",
     bio: "Leads partnerships with NABL-certified laboratories to deliver reliable home sample collection and rapid digital reports.",
     image: femaleDocImg,
+    imagePosition: "50% 18%",
     badge: "Diagnostics Lead",
   },
   {
@@ -71,6 +74,7 @@ export const LEADERSHIP_TEAM = [
     specialty: "MS, General Surgery • 12+ yrs experience",
     bio: "Coordinates surgical second opinions, hospital partnerships, and seamless post-operative follow-up journeys.",
     image: teleDocImg,
+    imagePosition: "50% 15%",
     badge: "Surgical Care",
   },
   {
@@ -79,7 +83,8 @@ export const LEADERSHIP_TEAM = [
     role: "AI Health Safety & Triage Division",
     specialty: "Physician-Reviewed Triage Models",
     bio: "Builds clear, responsible symptom guidance, e-prescription explainers, and lab report insights validated by clinicians.",
-    image: robotImg,
+    image: aiCompanionImg,
+    imagePosition: "50% 72%",
     badge: "AI Safety",
   },
 ];
@@ -294,7 +299,8 @@ export const BLOG_POSTS = [
     date: "Nov 04, 2026",
     author: "Dr. Ananya Kulkarni",
     authorRole: "MD, Pathology",
-    image: femaleDocImg,
+    image: labReportImg,
+    imagePosition: "50% 40%",
     featured: true,
     tags: ["Blood Tests", "Preventive Care", "Lab Reports"],
     excerpt:
@@ -320,6 +326,7 @@ export const BLOG_POSTS = [
     author: "Dr. Aarav Deshmukh",
     authorRole: "MD, Internal Medicine",
     image: teleDocImg,
+    imagePosition: "50% 15%",
     featured: false,
     tags: ["Teleconsultation", "Primary Care", "Doctor Visit"],
     excerpt:
@@ -343,7 +350,8 @@ export const BLOG_POSTS = [
     date: "Oct 19, 2026",
     author: "Docdor Clinical AI Team",
     authorRole: "Clinical Safety & ML",
-    image: robotImg,
+    image: aiCompanionImg,
+    imagePosition: "50% 72%",
     featured: false,
     tags: ["AI Assistant", "Patient Safety", "Digital Health"],
     excerpt:
@@ -368,6 +376,7 @@ export const BLOG_POSTS = [
     author: "Dr. Rohan Mehta",
     authorRole: "MS, Preventive & Surgical Care",
     image: saladWellnessImg,
+    imagePosition: "50% 74%",
     featured: false,
     tags: ["Nutrition", "Sleep", "Metabolic Health"],
     excerpt:
@@ -391,7 +400,8 @@ export const BLOG_POSTS = [
     date: "Sep 29, 2026",
     author: "Dr. Aarav Deshmukh",
     authorRole: "MD, Internal Medicine",
-    image: heroDocImg,
+    image: medicationImg,
+    imagePosition: "50% 50%",
     featured: false,
     tags: ["Pharmacy", "E-Prescription", "Medication Safety"],
     excerpt:
@@ -416,6 +426,7 @@ export const BLOG_POSTS = [
     author: "Dr. Meera Nair",
     authorRole: "BVSc, Veterinary Consultant",
     image: petCareImg,
+    imagePosition: "50% 25%",
     featured: false,
     tags: ["Pet Care", "Veterinary", "Wellness"],
     excerpt:

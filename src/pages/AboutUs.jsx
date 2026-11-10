@@ -9,6 +9,7 @@ import {
   FiShield,
   FiUsers,
 } from "react-icons/fi";
+import CardImage from "../components/common/CardImage";
 import PageHero from "../components/common/PageHero";
 import Link from "../router/Link";
 import { ROUTES } from "../router/routes";
@@ -100,11 +101,13 @@ const AboutUs = ({ isDarkMode }) => {
                   : "border-sky-200/80 bg-white/95 shadow-[0_24px_60px_rgba(14,165,233,0.16)]"
               }`}
             >
-              <div className="relative overflow-hidden rounded-[1.5rem]">
-                <img
+              <div className="relative h-72 sm:h-80 w-full overflow-hidden rounded-[1.5rem] bg-sky-50 dark:bg-slate-800">
+                <CardImage
                   src={heroDoc}
                   alt="Docdor senior physician consulting"
-                  className="h-72 sm:h-80 w-full object-cover object-top"
+                  objectPosition="50% 16%"
+                  loading="eager"
+                  isDarkMode={isDarkMode}
                 />
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-slate-950/55 via-slate-950/15 to-transparent" />
                 <span
@@ -365,14 +368,16 @@ const AboutUs = ({ isDarkMode }) => {
                 }`}
               >
                 <div
-                  className={`relative h-56 overflow-hidden ${
+                  className={`relative aspect-[4/3] w-full overflow-hidden ${
                     isDarkMode ? "bg-slate-800" : "bg-sky-50"
                   }`}
                 >
-                  <img
+                  <CardImage
                     src={member.image}
                     alt={member.name}
-                    className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                    objectPosition={member.imagePosition || "center"}
+                    isDarkMode={isDarkMode}
+                    className="transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-slate-950/45 to-transparent" />
                   <span className="absolute left-3.5 top-3.5 rounded-full bg-slate-950/75 px-3 py-1 text-[11px] font-semibold text-white backdrop-blur-md">

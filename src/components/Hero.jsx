@@ -8,6 +8,7 @@ import {
   FiVideo,
 } from "react-icons/fi";
 import heroDocImg from "../assets/images/hero-doctor.jpg";
+import CardImage from "./common/CardImage";
 import Link from "../router/Link";
 import { ROUTES } from "../router/routes";
 
@@ -212,11 +213,13 @@ const Hero = ({ isDarkMode, onOpenDownload }) => {
                     : "border-white/90 bg-white/95 shadow-[0_24px_70px_-15px_rgba(14,165,233,0.28)]"
                 }`}
               >
-                <div className="relative overflow-hidden rounded-[1.5rem] bg-sky-100 dark:bg-slate-800">
-                  <img
+                <div className="relative h-[340px] sm:h-[410px] w-full overflow-hidden rounded-[1.5rem] bg-sky-100 dark:bg-slate-800">
+                  <CardImage
                     src={heroDocImg}
                     alt="Docdor verified medical specialist"
-                    className="h-[340px] sm:h-[410px] w-full object-cover object-top"
+                    objectPosition="50% 16%"
+                    loading="eager"
+                    isDarkMode={isDarkMode}
                   />
 
                   {/* Subtle bottom vignette */}
